@@ -48,7 +48,7 @@ app.use('/signup', signupRoutes);
 
 
 app.get('/', (req, res) => {
-    res.send('Hello from my Server Home Page')
+    res.send('Greetings from Hotel booking application backend');
 });
 
 app.listen(port, () => {

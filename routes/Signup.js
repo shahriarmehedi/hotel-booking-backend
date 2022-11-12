@@ -21,8 +21,13 @@ router.post('/', async (req, res) => {
             }
         })
         if (user) {
-            res.send('User already exists')
+            res.send('User with this email already exists')
         } else {
+
+            // role can not be ADMIN
+            if (req.body.role === 'ADMIN') {
+                return res.status(401).json({ message: 'You are not authorized to open ADMIN account' })
+            }
             const hashedPassword = await bcrypt.hash(req.body.password, 10)
             const newUser = await prisma.user.create({
                 data: {
