@@ -21,6 +21,7 @@
     "express-session": "^1.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.11.0",
-    "prisma": "^4.6.0"
+    "prisma": "^4.6.0",
+    "swagger-ui-express": "^4.6.0"
   }
 }

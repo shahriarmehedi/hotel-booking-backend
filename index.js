@@ -5,6 +5,13 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const port = process.env.PORT || 5000;
 
+// import swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./helper/documentation');
+
+// use swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 // MIDDLEWARE
 const cors = require('cors');
