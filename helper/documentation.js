@@ -5,16 +5,23 @@ const swaggerDocumentation = {
         title: 'Hotel booking API',
         version: '1.0.0',
         description: 'This is the documentation for the hotel booking API',
-        basePath: '/api/v1',
-
-
+        contact: {
+            name: 'Hotel booking API',
+            url: "https://hotel-booking-backend-ngyx.onrender.com/api-docs/"
+        },
+        servers: ["https://hotel-booking-backend-ngyx.onrender.com/api-docs/"],
     },
 
     servers: [
         {
+            url: 'https://hotel-booking-backend-ngyx.onrender.com/',
+            description: 'Test server',
+        },
+        {
             url: 'http://localhost:5000',
             description: 'Development server',
         },
+
     ],
 
 
@@ -39,6 +46,7 @@ const swaggerDocumentation = {
 
             get: {
                 tags: ['User'],
+                summary: 'Get all users',
                 description: 'Get all users',
                 operationId: 'getUsers',
                 parameters: [],
@@ -67,10 +75,14 @@ const swaggerDocumentation = {
             post: {
                 tags: ['User'],
                 description: 'Create user',
+                summary: 'Create user',
                 operationId: 'createUser',
                 parameters: [],
-                protected: true,
-                jwt: true,
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
                 requestBody: {
                     content: {
                         'application/json': {
@@ -97,7 +109,127 @@ const swaggerDocumentation = {
                     },
                 },
             },
+
+
+
+
+
         },
+        '/user/{id}': {
+            get: {
+                tags: ['User'],
+                summary: 'Get user by id',
+                description: 'Get user by id',
+                operationId: 'getUserById',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of user to return',
+                        required: true,
+                        schema: {
+                            type: 'integer',
+                            format: 'int64',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'User was obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/User',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            put: {
+                tags: ['User'],
+                description: 'Update user',
+                summary: 'Update user by id',
+                operationId: 'updateUser',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/User',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '200': {
+                        description: 'User updated',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/User',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            delete: {
+                tags: ['User'],
+                description: 'Delete user',
+                summary: 'Delete user by id',
+                operationId: 'deleteUser',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/User',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '200': {
+                        description: 'User deleted',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/User',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
         '/login': {
             post: {
                 tags: ['Login'],
