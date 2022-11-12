@@ -128,8 +128,7 @@ const swaggerDocumentation = {
                         description: 'ID of user to return',
                         required: true,
                         schema: {
-                            type: 'integer',
-                            format: 'int64',
+                            type: 'string',
                         },
                     },
                 ],
@@ -196,22 +195,22 @@ const swaggerDocumentation = {
                 description: 'Delete user',
                 summary: 'Delete user by id',
                 operationId: 'deleteUser',
-                parameters: [],
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of user to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
                 security: [
                     {
                         bearerAuth: [],
                     },
                 ],
-                requestBody: {
-                    content: {
-                        'application/json': {
-                            schema: {
-                                $ref: '#/components/schemas/User',
-                            },
-                        },
-                    },
-                    required: true,
-                },
                 responses: {
                     '200': {
                         description: 'User deleted',
