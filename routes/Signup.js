@@ -41,9 +41,10 @@ router.post('/', async (req, res) => {
             const token = jwt.sign(
                 { id: newUser.id }
                 , process.env.JWT_SECRET, {
-                expiresIn: '1h'
+                expiresIn: '3h'
             })
             res.status(200).json({
+                success: true,
                 message: "Signup successful",
                 token: token
             })
@@ -51,6 +52,7 @@ router.post('/', async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(401).json({
+            success: false,
             message: "Signup failed",
             error: err
         })

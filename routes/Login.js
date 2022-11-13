@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
                     expiresIn: '3h'
                 })
                 res.status(200).json({
+                    success: true,
                     message: "Login successful",
                     token: token
                 })
@@ -36,12 +37,14 @@ router.post('/', async (req, res) => {
             }
         } else {
             res.status(401).json({
+                success: false,
                 message: "Auth failed"
             })
         }
     } catch (err) {
         res.status(401).json({
-            message: "Auth failed"
+            success: false,
+            message: "Auth failed with error",
         })
         console.log(err)
     }
