@@ -11,41 +11,115 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  username String?
-  email    String  @unique
-  name     String?
-  password String
-  role     String  @default("USER")
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  username    String?
+  email       String        @unique
+  name        String?
+  password    String
+  role        String        @default("USER")
+  HotelReview HotelReview[]
 }
 
-// model Hotel {
-//   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-//   name        String
-//   description String
-//   rating      Int
-//   reviews     Review[] @relation(references: [id])
-//   halalRating Int
-//   price       Int
-//   image       String
-//   amenities   String[]
-//   gallery     String[]
-//   location    String
-//   city        String
-//   address     String
-//   country     String
-//   createdAt   DateTime @default(now())
-//   updatedAt   DateTime @updatedAt
-// }
+model HotelReview {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  hotelName String
+  hotelId   String
+  rating    Int
+  title     String
+  review    String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  Hotel     Hotel    @relation(fields: [hotelId], references: [id])
+}
 
-// model Review {
-//   id        String  @id @default(auto()) @map("_id") @db.ObjectId
-//   hotel     Hotel   @relation(fields: [hotelId], references: [id])
-//   hotelId   String
-//   user      User    @relation(fields: [userId], references: [id])
-//   userId    String
-//   rating    Int
-//   comment   String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
+model Amenities {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  Hotel           Hotel?   @relation(fields: [hotelId], references: [id])
+  hotelId         String?  @db.ObjectId
+  freewifi        Boolean?
+  freeparking     Boolean?
+  pool            Boolean?
+  spa             Boolean?
+  gym             Boolean?
+  bar             Boolean?
+  freebar         Boolean?
+  restaurant      Boolean?
+  roomservice     Boolean?
+  laundry         Boolean?
+  breakfast       Boolean?
+  airconditioning Boolean?
+  minibar         Boolean?
+}
+
+model Hotel {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  rating      Int
+  halalRating Int
+  price       Int
+  image       String
+  amenities   Amenities[]
+  gallery     String[]
+  location    String
+  city        String
+  address     String
+  country     String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  HotelReview HotelReview[]
+  thumbnail   String
+  hotelRoom   HotelRoom[]
+}
+
+model HotelRoom {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  size        String
+  adults      Int
+  children    Int
+  price       Int
+  image       String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  Hotel       Hotel      @relation(fields: [hotelId], references: [id])
+  hotelId     String     @db.ObjectId
+  thumbnail   String
+  roomType    RoomType[]
+  Booking     Booking[]
+}
+
+model RoomType {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  description  String
+  price        Int
+  bed          String
+  meals        String
+  cancellation String
+  payment      String
+  image        String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  HotelRoom    HotelRoom @relation(fields: [hotelRoomId], references: [id])
+  hotelRoomId  String    @db.ObjectId
+  thumbnail    String
+}
+
+model Booking {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  price       Int
+  image       String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  HotelRoom   HotelRoom @relation(fields: [hotelRoomId], references: [id])
+  hotelRoomId String    @db.ObjectId
+  thumbnail   String
+}

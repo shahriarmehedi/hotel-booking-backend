@@ -33,8 +33,8 @@ router.post('/', async (req, res) => {
                 data: {
                     name: req.body.name,
                     email: req.body.email,
-                    username: req.body.username,
-                    role: req.body.role,
+                    username: req.body.username || req.body.email,
+                    role: req.body.role || 'USER',
                     password: hashedPassword
                 }
             })
