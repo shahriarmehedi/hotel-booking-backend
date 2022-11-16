@@ -43,7 +43,7 @@ router.get('/:id', checkLogin, async (req, res) => {
     if (loggedInUser.role === 'ADMIN') {
         const user = await prisma.user.findUnique({
             where: {
-                id: parseInt(req.params.id)
+                id: req.params.id
             }
         })
         res.status(200).json(user)
@@ -58,12 +58,15 @@ router.get('/:id', checkLogin, async (req, res) => {
 
 router.post('/', checkLogin, async (req, res) => {
 
-    // only admin can create user
-    if (req.user.role !== 'ADMIN') {
-        return res.status(401).json({ message: 'You are not authorized' })
-    }
+    // get LoggedIn user
+    const loggedInUser = await prisma.user.findUnique({
+        where: {
+            id: req.user.id
+        }
+    })
 
-    try {
+    // only admin can create user
+    if (loggedInUser.role === 'ADMIN') {
         const user = await prisma.user.create({
             data: {
                 name: req.body.name,
@@ -74,9 +77,10 @@ router.post('/', checkLogin, async (req, res) => {
             }
         })
         res.status(201).json(user)
-    } catch (err) {
-        res.status(400).json({ message: err })
+    } else {
+        res.status(401).json({ message: 'Unauthorized' })
     }
+
 })
 
 // UPDATE USER
