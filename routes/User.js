@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client')
-
 const checkLogin = require('../middlewares/CheckLogin');
-
 const prisma = new PrismaClient()
 
 
@@ -35,19 +33,22 @@ router.get('/', checkLogin, async (req, res) => {
 router.get('/:id', checkLogin, async (req, res) => {
 
     // admin can get all users and user can only get himself
-
-    if (req.userData.role === 'ADMIN' || req.userData.id === req.params.id) {
-        try {
-            const user = await prisma.user.findUnique({
-                where: {
-                    id: req.params.id
-                }
-            })
-            res.status(200).json(user)
-        } catch (err) {
-            res.status(404).json({ message: 'Something went wrong', error: err })
+    // GET LOGGED IN USER
+    const loggedInUser = await prisma.user.findUnique({
+        where: {
+            id: req.user.id
         }
+    })
+
+    if (loggedInUser.role === 'ADMIN') {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+        res.status(200).json(user)
     } else {
+        // unauthorized
         res.status(401).json({ message: 'Unauthorized' })
     }
 
