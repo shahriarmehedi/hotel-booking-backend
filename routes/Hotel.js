@@ -8,27 +8,61 @@ const prisma = new PrismaClient()
 // GET ALL HOTELS
 
 router.get('/', checkLogin, async (req, res) => {
-    try {
-        const hotels = await prisma.hotel.findMany()
+
+    // get LoggedIn user
+    const loggedInUser = await prisma.user.findUnique({
+        where: {
+            id: req.user.id
+        }
+    })
+
+    // ADMIN can get all hotels, user will get only his hotels
+    if (loggedInUser.role === 'ADMIN') {
+        try {
+            const hotels = await prisma.hotel.findMany()
+            res.status(200).json(hotels)
+        } catch (err) {
+            res.status(404).json({ message: 'Something went wrong', error: err })
+        }
+    } else {
+        const hotels = await prisma.hotel.findMany({
+            where: {
+                userId: req.user.id
+            }
+        })
         res.status(200).json(hotels)
-    } catch (err) {
-        res.status(404).json({ message: 'Something went wrong', error: err })
     }
+
 })
 
 // GET ONE HOTEL
 
 router.get('/:id', checkLogin, async (req, res) => {
-    try {
-        const hotel = await prisma.hotel.findUnique({
-            where: {
-                id: req.params.id
-            }
-        })
-        res.status(200).json(hotel)
-    } catch (err) {
-        res.status(404).json({ message: 'Something went wrong', error: err })
+
+    // admin can get all hotels and user can only get his hotels
+    // GET LOGGED IN USER
+    const loggedInUser = await prisma.user.findUnique({
+        where: {
+            id: req.user.id
+        }
+    })
+
+    if (loggedInUser.role === 'ADMIN') {
+        try {
+            const hotel = await prisma.hotel.findUnique({
+                where: {
+                    id: req.params.id
+                }
+            })
+            res.status(200).json(hotel)
+        } catch (err) {
+            res.status(404).json({ message: 'Something went wrong', error: err })
+        }
+    } else {
+        // unauthorized
+        res.status(401).json({ message: 'Unauthorized' })
     }
+
 })
 
 // CREATE HOTEL

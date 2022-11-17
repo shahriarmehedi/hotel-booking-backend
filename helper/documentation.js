@@ -39,6 +39,10 @@ const swaggerDocumentation = {
             name: 'Signup',
             description: 'API for signup in the system',
         },
+        {
+            name: 'Hotel',
+            description: 'API for hotels in the system',
+        }
     ],
 
     paths: {
@@ -110,11 +114,8 @@ const swaggerDocumentation = {
                 },
             },
 
-
-
-
-
         },
+
         '/user/{id}': {
             get: {
                 tags: ['User'],
@@ -229,6 +230,7 @@ const swaggerDocumentation = {
             },
         },
 
+
         '/login': {
             post: {
                 tags: ['Login'],
@@ -297,7 +299,187 @@ const swaggerDocumentation = {
                 },
             },
         },
+
+        '/hotel': {
+            get: {
+                tags: ['Hotel'],
+                summary: 'Get all hotels',
+                description: 'Get all hotels',
+                operationId: 'getHotels',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotels were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Hotel',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Hotel'],
+                description: 'Create hotel',
+                summary: 'Create hotel',
+                operationId: 'createHotel',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Hotel',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Hotel created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Hotel',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
+        '/hotel/{id}': {
+            get: {
+                tags: ['Hotel'],
+                summary: 'Get hotel by id',
+                description: 'Get hotel by id',
+                operationId: 'getHotelById',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of hotel to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel was obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Hotel',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            put: {
+                tags: ['Hotel'],
+                description: 'Update hotel',
+                summary: 'Update hotel by id',
+                operationId: 'updateHotel',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Hotel',
+                            },
+                        },
+                    },
+                },
+                responses: {
+                    '200': {
+                        description: 'Hotel updated',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Hotel',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            delete: {
+                tags: ['Hotel'],
+                description: 'Delete hotel',
+                summary: 'Delete hotel by id',
+                operationId: 'deleteHotel',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of hotel to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel deleted',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Hotel',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
+
     },
+
 
     components: {
         securitySchemes: {
@@ -371,11 +553,92 @@ const swaggerDocumentation = {
                     },
                 },
             },
+            Hotel: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the hotel',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the hotel',
+                    },
+                    rating: {
+                        type: 'number',
+                        description: 'Rating of the hotel',
+                    },
+                    halalRating: {
+                        type: 'number',
+                        description: 'Halal rating of the hotel',
+
+                    },
+                    price: {
+                        type: 'number',
+                        description: 'Price of the hotel',
+                    },
+                    image: {
+                        type: 'string',
+                        description: 'Image of the hotel',
+                    },
+                    amenities: {
+                        type: 'array',
+                        description: 'Amenities of the hotel',
+                        items: {
+                            type: 'string',
+                        },
+                    },
+                    gallery: {
+                        type: 'array',
+                        description: 'Gallery of the hotel',
+                        items: {
+                            type: 'string',
+                        },
+                    },
+                    location: {
+                        type: 'string',
+                        description: 'Location of the hotel',
+                    },
+                    city: {
+                        type: 'string',
+                        description: 'City of the hotel',
+                    },
+                    address: {
+                        type: 'string',
+                        description: 'Address of the hotel',
+                    },
+                    country: {
+                        type: 'string',
+                        description: 'Country of the hotel',
+                    },
+                    thumbnail: {
+                        type: 'string',
+                        description: 'Thumbnail of the hotel',
+                    },
+                    HotelReview: {
+                        type: 'array',
+                        description: 'Reviews of the hotel',
+                        items: {
+                            type: 'string',
+                        },
+                    },
+                    HotelRoom: {
+                        type: 'array',
+                        description: 'Rooms of the hotel',
+                        items: {
+                            type: 'string',
+                        },
+                    }
+                },
+
+
+
+
+
+            },
+
         },
     },
-
-
-
 
 };
 
