@@ -16,36 +16,30 @@ router.get('/', checkLogin, async (req, res) => {
                 id: req.user.id
             }
         })
+        console.log(loggedInUser);
 
         // ADMIN can get all hotels, user will get only his hotels
         if (loggedInUser.role === 'ADMIN') {
-            try {
-                const hotels = await prisma.hotel.findMany()
-                res.status(200).json(hotels)
-            } catch (err) {
-                res.status(404).json({ message: 'Something went wrong', error: err })
-            }
+            const hotels = await prisma.hotel.findMany()
+            res.status(200).json({
+                success: true,
+                message: 'All hotels fetched successfully',
+                hotels: hotels
+            })
         } else {
-            try {
-                const hotels = await prisma.hotel.findMany({
-                    where: {
-                        userId: req.user.id
-                    }
-                })
-                res.status(200).json({
-                    success: true,
-                    message: 'All hotels fetched successfully',
-                    hotels: hotels
-                })
-            } catch (err) {
-                res.status(404).json({
-                    success: false,
-                    message: 'Unable to fetch all hotels',
-                    error: err
-                })
-            }
+            const hotels = await prisma.hotel.findMany({
+                where: {
+                    userId: req.user.id
+                }
+            })
+            res.status(200).json({
+                success: true,
+                message: 'Requested hotels fetched successfully',
+                hotels: hotels
+            })
         }
     }
+
     catch (err) {
         res.status(404).json({
             success: false,
