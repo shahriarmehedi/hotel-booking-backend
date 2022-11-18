@@ -581,13 +581,6 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Image of the hotel',
                     },
-                    amenities: {
-                        type: 'array',
-                        description: 'Amenities of the hotel',
-                        items: {
-                            type: 'string',
-                        },
-                    },
                     gallery: {
                         type: 'array',
                         description: 'Gallery of the hotel',
@@ -615,20 +608,6 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Thumbnail of the hotel',
                     },
-                    HotelReview: {
-                        type: 'array',
-                        description: 'Reviews of the hotel',
-                        items: {
-                            type: 'string',
-                        },
-                    },
-                    HotelRoom: {
-                        type: 'array',
-                        description: 'Rooms of the hotel',
-                        items: {
-                            type: 'string',
-                        },
-                    }
                 },
 
 

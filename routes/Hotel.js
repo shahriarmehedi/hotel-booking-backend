@@ -9,28 +9,49 @@ const prisma = new PrismaClient()
 
 router.get('/', checkLogin, async (req, res) => {
 
-    // get LoggedIn user
-    const loggedInUser = await prisma.user.findUnique({
-        where: {
-            id: req.user.id
-        }
-    })
-
-    // ADMIN can get all hotels, user will get only his hotels
-    if (loggedInUser.role === 'ADMIN') {
-        try {
-            const hotels = await prisma.hotel.findMany()
-            res.status(200).json(hotels)
-        } catch (err) {
-            res.status(404).json({ message: 'Something went wrong', error: err })
-        }
-    } else {
-        const hotels = await prisma.hotel.findMany({
+    try {
+        // get LoggedIn user
+        const loggedInUser = await prisma.user.findUnique({
             where: {
-                userId: req.user.id
+                id: req.user.id
             }
         })
-        res.status(200).json(hotels)
+
+        // ADMIN can get all hotels, user will get only his hotels
+        if (loggedInUser.role === 'ADMIN') {
+            try {
+                const hotels = await prisma.hotel.findMany()
+                res.status(200).json(hotels)
+            } catch (err) {
+                res.status(404).json({ message: 'Something went wrong', error: err })
+            }
+        } else {
+            try {
+                const hotels = await prisma.hotel.findMany({
+                    where: {
+                        userId: req.user.id
+                    }
+                })
+                res.status(200).json({
+                    success: true,
+                    message: 'All hotels fetched successfully',
+                    hotels: hotels
+                })
+            } catch (err) {
+                res.status(404).json({
+                    success: false,
+                    message: 'Unable to fetch all hotels',
+                    error: err
+                })
+            }
+        }
+    }
+    catch (err) {
+        res.status(404).json({
+            success: false,
+            message: 'Unable to fetch all hotels',
+            error: err
+        })
     }
 
 })
@@ -39,28 +60,63 @@ router.get('/', checkLogin, async (req, res) => {
 
 router.get('/:id', checkLogin, async (req, res) => {
 
-    // admin can get all hotels and user can only get his hotels
-    // GET LOGGED IN USER
-    const loggedInUser = await prisma.user.findUnique({
-        where: {
-            id: req.user.id
-        }
-    })
+    try {
+        // admin can get all hotels and user can only get his hotels
+        // GET LOGGED IN USER
+        const loggedInUser = await prisma.user.findUnique({
+            where: {
+                id: req.user.id
+            }
+        })
 
-    if (loggedInUser.role === 'ADMIN') {
-        try {
-            const hotel = await prisma.hotel.findUnique({
-                where: {
-                    id: req.params.id
-                }
-            })
-            res.status(200).json(hotel)
-        } catch (err) {
-            res.status(404).json({ message: 'Something went wrong', error: err })
+        if (loggedInUser.role === 'ADMIN') {
+            try {
+                const hotel = await prisma.hotel.findUnique({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                res.status(200).json({
+                    success: true,
+                    message: 'Requested hotel fetched successfully',
+                    hotel: hotel
+                })
+            } catch (err) {
+                res.status(404).json({
+                    success: false,
+                    message: 'Unable to fetch requested hotel',
+                    error: err
+                })
+            }
+        } else {
+            try {
+                // if user request his own hotel then he can get it
+                const hotel = await prisma.hotel.findUnique({
+                    where: {
+                        id: req.params.id,
+                        userId: req.user.id
+                    }
+                })
+                res.status(200).json({
+                    success: true,
+                    message: 'Requested hotel fetched successfully',
+                    hotel: hotel
+                })
+            } catch (err) {
+                res.status(404).json({
+                    success: false,
+                    message: 'Unable to fetch requested hotel',
+                    error: err
+                })
+            }
         }
-    } else {
-        // unauthorized
-        res.status(401).json({ message: 'Unauthorized' })
+    }
+    catch (err) {
+        res.status(404).json({
+            success: false,
+            message: 'Unable to fetch requested hotel',
+            error: err
+        })
     }
 
 })
@@ -68,83 +124,121 @@ router.get('/:id', checkLogin, async (req, res) => {
 // CREATE HOTEL
 
 router.post('/', checkLogin, async (req, res) => {
-    // only admin can create hotel
-    // GEt logged in user
-    const loggedInUser = await prisma.user.findUnique({
-        where: {
-            id: req.user.id
-        }
-    })
-    if (loggedInUser.role === 'ADMIN') {
-        try {
-            const hotel = await prisma.hotel.create({
-                data: {
-                    name: req.body.name,
-                    description: req.body.description,
-                    rating: req.body.rating,
-                    halalRating: req.body.halalRating,
-                    price: req.body.price,
-                    image: req.body.image,
-                    thumbnail: req.body.thumbnail,
-                    amenities: req.body.amenities,
-                    gallery: req.body.gallery,
-                    location: req.body.location,
-                    city: req.body.city,
-                    address: req.body.address,
-                    country: req.body.country,
-                    HotelReview: [],
-                    HotelRoom: req.body.HotelRoom
-                }
+
+    try {
+        // only admin can create hotel
+        // GEt logged in user
+        const loggedInUser = await prisma.user.findUnique({
+            where: {
+                id: req.user.id
+            }
+        })
+        if (loggedInUser.role === 'ADMIN') {
+            try {
+                const hotel = await prisma.hotel.create({
+                    data: {
+                        name: req.body.name,
+                        description: req.body.description,
+                        rating: req.body.rating,
+                        halalRating: req.body.halalRating,
+                        price: req.body.price,
+                        image: req.body.image,
+                        thumbnail: req.body.thumbnail,
+                        gallery: req.body.gallery,
+                        location: req.body.location,
+                        city: req.body.city,
+                        address: req.body.address,
+                        country: req.body.country,
+                    }
+                })
+                res.status(201).json({
+                    success: true,
+                    message: 'Hotel created successfully',
+                    hotel: hotel
+                })
+            } catch (err) {
+                res.status(404).json({
+                    success: false,
+                    message: 'Something went wrong',
+                    error: err
+                })
+            }
+        } else {
+            res.status(401).json({
+                success: false,
+                message: 'You are not authorized to create hotel'
             })
-            res.status(201).json(hotel)
-        } catch (err) {
-            res.status(404).json({ message: 'Something went wrong', error: err })
         }
-    } else {
-        res.status(401).json({ message: 'Unauthorized' })
+    }
+    catch (err) {
+        res.status(404).json({
+            success: false,
+            message: 'Unable to create hotel',
+            error: err
+        })
     }
 })
 
 // UPDATE HOTEL
 
-router.patch('/:id', checkLogin, async (req, res) => {
+router.put('/:id', checkLogin, async (req, res) => {
 
-    // only admin can update hotel
-    // GEt logged in user
-    const loggedInUser = await prisma.user.findUnique({
-        where: {
-            id: req.user.id
-        }
-    })
+    try {
+        // only admin can update hotel
+        // GEt logged in user
+        const loggedInUser = await prisma.user.findUnique({
+            where: {
+                id: req.user.id
+            }
+        })
 
-    if (loggedInUser.role === 'ADMIN') {
-        try {
-            const hotel = await prisma.hotel.update({
-                where: {
-                    id: req.params.id
-                },
-                data: {
-                    name: req.body.name,
-                    address: req.body.address,
-                    city: req.body.city,
-                    country: req.body.country,
-                    description: req.body.description,
-                    image: req.body.image,
-                    price: req.body.price,
-                    stars: req.body.stars,
-                    user: {
-                        connect: {
-                            id: req.user.id
-                        }
+        if (loggedInUser.role === 'ADMIN') {
+            try {
+                const hotel = await prisma.hotel.update({
+                    where: {
+                        id: req.params.id
+                    },
+                    data: {
+                        name: req.body.name || hotel.name,
+                        description: req.body.description || hotel.description,
+                        rating: req.body.rating || hotel.rating,
+                        halalRating: req.body.halalRating || hotel.halalRating,
+                        price: req.body.price || hotel.price,
+                        image: req.body.image || hotel.image,
+                        thumbnail: req.body.thumbnail || hotel.thumbnail,
+                        gallery: req.body.gallery || hotel.gallery,
+                        location: req.body.location || hotel.location,
+                        city: req.body.city || hotel.city,
+                        address: req.body.address || hotel.address,
+                        country: req.body.country || hotel.country,
+
                     }
-                }
+                })
+                res.status(200).json({
+                    success: true,
+                    message: 'Hotel updated successfully',
+                    hotel: hotel
+                })
+            } catch (err) {
+                res.status(400).json({
+                    success: false,
+                    message: 'Unable to update hotel',
+                    error: err
+                })
+            }
+        } else {
+            res.status(401).json({
+                success: false,
+                message: 'You are not authorized to update hotel'
             })
-            res.status(200).json(hotel)
-        } catch (err) {
-            res.status(400).json({ message: 'Something went wrong', error: err })
         }
-    } else {
-        res.status(401).json({ message: 'Unauthorized' })
+    }
+    catch (err) {
+        res.status(404).json({
+            success: false,
+            message: 'Unable to update hotel',
+            error: err
+        })
     }
 
 })
@@ -153,27 +247,47 @@ router.patch('/:id', checkLogin, async (req, res) => {
 
 router.delete('/:id', checkLogin, async (req, res) => {
 
-    // only admin can delete hotel
-    // GEt logged in user
-    const loggedInUser = await prisma.user.findUnique({
-        where: {
-            id: req.user.id
-        }
-    })
+    try {
+        // only admin can delete hotel
+        // GEt logged in user
+        const loggedInUser = await prisma.user.findUnique({
+            where: {
+                id: req.user.id
+            }
+        })
 
-    if (loggedInUser.role === 'ADMIN') {
-        try {
-            const hotel = await prisma.hotel.delete({
-                where: {
-                    id: req.params.id
-                }
+        if (loggedInUser.role === 'ADMIN') {
+            try {
+                const hotel = await prisma.hotel.delete({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                res.status(200).json({
+                    success: true,
+                    message: 'Hotel deleted successfully',
+                    hotel: hotel
+                })
+            } catch (err) {
+                res.status(400).json({
+                    success: false,
+                    message: 'Something went wrong',
+                    error: err
+                })
+            }
+        } else {
+            res.status(401).json({
+                success: false,
+                message: 'You are not authorized to delete hotel'
             })
-            res.status(200).json(hotel)
-        } catch (err) {
-            res.status(400).json({ message: 'Something went wrong', error: err })
         }
-    } else {
-        res.status(401).json({ message: 'Unauthorized' })
+    }
+    catch (err) {
+        res.status(404).json({
+            success: false,
+            message: 'Unable to delete hotel',
+            error: err
+        })
     }
 })
 

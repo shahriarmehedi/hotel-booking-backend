@@ -28,11 +28,14 @@ const loginRoutes = require('./routes/Login');
 // signup routes
 const signupRoutes = require('./routes/Signup');
 
+// hotel routes
+const hotelRoutes = require('./routes/Hotel');
+
+
 app.use('/user', userRoutes);
 app.use('/login', loginRoutes);
 app.use('/signup', signupRoutes);
-
-
+app.use('/hotel', hotelRoutes);
 
 
 // MIDDLEWARE

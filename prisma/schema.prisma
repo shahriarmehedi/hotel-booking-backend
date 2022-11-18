@@ -63,7 +63,7 @@ model Hotel {
   halalRating Int
   price       Int
   image       String
-  amenities   Amenities[]
+  amenities   String
   gallery     String[]
   location    String
   city        String
@@ -71,9 +71,10 @@ model Hotel {
   country     String
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
-  HotelReview HotelReview[]
+  hotelReview HotelReview[]
   thumbnail   String
   hotelRoom   HotelRoom[]
+  Amenities   Amenities[]
 }
 
 model HotelRoom {

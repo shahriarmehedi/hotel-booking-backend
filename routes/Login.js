@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
                         }
                     }
                     , process.env.JWT_SECRET, {
-                    expiresIn: '3h'
+                    expiresIn: '12h'
                 })
                 res.status(200).json({
                     success: true,
