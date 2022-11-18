@@ -96,13 +96,15 @@ router.post('/', checkLogin, async (req, res) => {
 
         // only admin can create user
         if (loggedInUser.role === 'ADMIN') {
+            const hashedPassword = await bcrypt.hash(req.body.password, 10)
+            const defaultHashedPassword = await bcrypt.hash('12345678', 10)
             const user = await prisma.user.create({
                 data: {
                     name: req.body.name,
                     email: req.body.email,
-                    username: req.body.username,
-                    role: req.body.role,
-                    password: req.body.password
+                    username: req.body.username || req.body.email,
+                    role: req.body.role || 'USER',
+                    password: hashedPassword || defaultHashedPassword
                 }
             })
             res.status(201).json({

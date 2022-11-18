@@ -27,10 +27,7 @@ const swaggerDocumentation = {
 
 
     tags: [
-        {
-            name: 'User',
-            description: 'API for users in the system',
-        },
+
         {
             name: 'Login',
             description: 'API for login in the system',
@@ -38,6 +35,10 @@ const swaggerDocumentation = {
         {
             name: 'Signup',
             description: 'API for signup in the system',
+        },
+        {
+            name: 'User',
+            description: 'API for users in the system',
         },
         {
             name: 'Hotel',
