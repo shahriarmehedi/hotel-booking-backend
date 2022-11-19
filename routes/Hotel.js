@@ -20,7 +20,9 @@ router.get('/', checkLogin, async (req, res) => {
 
         // ADMIN can get all hotels, user will get only his hotels
         if (loggedInUser.role === 'ADMIN') {
+            console.log("yes I am admin");
             const hotels = await prisma.hotel.findMany()
+            console.log(hotels);
             res.status(200).json({
                 success: true,
                 message: 'All hotels fetched successfully',
