@@ -14,12 +14,18 @@ const checkLogin = async (req, res, next) => {
             }
         })
         if (!user) {
-            return res.status(401).json({ message: "User not found" })
+            return res.status(401).json({
+                success: false,
+                message: "User not found"
+            })
         }
         req.user = user;
         next();
     } catch (err) {
-        return res.status(401).json({ message: "Unauthorized" })
+        return res.status(401).json({
+            success: false,
+            message: "Authentication failed"
+        })
     }
 }
 

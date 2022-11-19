@@ -9,26 +9,24 @@ const prisma = new PrismaClient()
 
 router.get('/', checkLogin, async (req, res) => {
 
-    try {
-        // get LoggedIn user
-        const loggedInUser = await prisma.user.findUnique({
-            where: {
-                id: req.user.id
-            }
-        })
-        console.log(loggedInUser);
 
-        // ADMIN can get all hotels, user will get only his hotels
-        if (loggedInUser.role === 'ADMIN') {
-            console.log("yes I am admin");
-            const hotels = await prisma.hotel.findMany()
-            console.log(hotels);
-            res.status(200).json({
-                success: true,
-                message: 'All hotels fetched successfully',
-                hotels: hotels
-            })
-        } else {
+    // get LoggedIn user
+    const loggedInUser = await prisma.user.findUnique({
+        where: {
+            id: req.user.id
+        }
+    })
+
+    // ADMIN can get all hotels, user will get only his hotels
+    if (loggedInUser.role === 'ADMIN') {
+        const hotels = await prisma.hotel.findMany()
+        res.status(200).json({
+            success: true,
+            message: 'All hotels fetched successfully',
+            hotels: hotels
+        })
+    } else {
+        try {
             const hotels = await prisma.hotel.findMany({
                 where: {
                     userId: req.user.id
@@ -40,15 +38,15 @@ router.get('/', checkLogin, async (req, res) => {
                 hotels: hotels
             })
         }
+        catch (err) {
+            res.status(404).json({
+                success: false,
+                message: 'Unable to fetch hotels',
+                error: err
+            })
+        }
     }
 
-    catch (err) {
-        res.status(404).json({
-            success: false,
-            message: 'Unable to fetch all hotels',
-            error: err
-        })
-    }
 
 })
 
