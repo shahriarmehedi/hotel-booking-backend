@@ -21,7 +21,10 @@ router.post('/', async (req, res) => {
             }
         })
         if (user) {
-            res.send('User with this email already exists')
+            res.status(409).json({
+                success: false,
+                message: "User already exists, try different email"
+            })
         } else {
 
             // role can not be ADMIN
@@ -53,7 +56,7 @@ router.post('/', async (req, res) => {
             })
             res.status(200).json({
                 success: true,
-                message: "Signup successful",
+                message: "User signed up successfully",
                 token: token
             })
         }

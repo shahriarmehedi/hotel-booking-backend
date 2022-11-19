@@ -10,43 +10,52 @@ const prisma = new PrismaClient()
 router.get('/', checkLogin, async (req, res) => {
 
 
-    // get LoggedIn user
-    const loggedInUser = await prisma.user.findUnique({
-        where: {
-            id: req.user.id
-        }
-    })
-
-    // ADMIN can get all hotels, user will get only his hotels
-    if (loggedInUser.role === 'ADMIN') {
-        const hotels = await prisma.hotel.findMany()
-        res.status(200).json({
-            success: true,
-            message: 'All hotels fetched successfully',
-            hotels: hotels
+    try {
+        // get LoggedIn user
+        const loggedInUser = await prisma.user.findUnique({
+            where: {
+                id: req.user.id
+            }
         })
-    } else {
-        try {
-            const hotels = await prisma.hotel.findMany({
-                where: {
-                    userId: req.user.id
-                }
-            })
+
+        // ADMIN can get all hotels, user will get only his hotels
+        if (loggedInUser.role === 'ADMIN') {
+            const hotels = await prisma.hotel.findMany()
             res.status(200).json({
                 success: true,
-                message: 'Requested hotels fetched successfully',
+                message: 'All hotels fetched successfully',
                 hotels: hotels
             })
+        } else {
+            try {
+                const hotels = await prisma.hotel.findMany({
+                    where: {
+                        userId: req.user.id
+                    }
+                })
+                res.status(200).json({
+                    success: true,
+                    message: 'Requested hotels fetched successfully',
+                    hotels: hotels
+                })
+            }
+            catch (err) {
+                res.status(404).json({
+                    success: false,
+                    message: 'Unable to fetch hotels',
+                    error: err
+                })
+            }
         }
-        catch (err) {
-            res.status(404).json({
-                success: false,
-                message: 'Unable to fetch hotels',
-                error: err
-            })
-        }
-    }
 
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error, unable to fetch hotels',
+            error: err
+        })
+    }
 
 })
 
