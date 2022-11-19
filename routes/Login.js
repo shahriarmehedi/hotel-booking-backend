@@ -13,48 +13,41 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    try {
-        const user = await prisma.user.findUnique({
-            where: {
-                email: req.body.email
-            }
-        })
-        if (user) {
-            const validPassword = await bcrypt.compare(req.body.password, user.password)
-            if (validPassword) {
-                const token = jwt.sign(
-                    {
-                        id: user.id,
-                        user: {
-                            name: user.name,
-                            email: user.email,
-                            username: user.username,
-                            role: user.role
-                        }
-                    }
-                    , process.env.JWT_SECRET, {
-                    expiresIn: '12h'
-                })
-                res.status(200).json({
-                    success: true,
-                    message: "Login successful",
-                    token: token
-                })
-            } else {
-                res.send('Invalid password')
-            }
-        } else {
-            res.status(401).json({
-                success: false,
-                message: "Auth failed"
-            })
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email: req.body.email
         }
-    } catch (err) {
+    })
+    if (user) {
+        const validPassword = await bcrypt.compare(req.body.password, user.password)
+        if (validPassword) {
+            const token = jwt.sign(
+                {
+                    id: user.id,
+                    user: {
+                        name: user.name,
+                        email: user.email,
+                        username: user.username,
+                        role: user.role
+                    }
+                }
+                , process.env.JWT_SECRET, {
+                expiresIn: '12h'
+            })
+            res.status(200).json({
+                success: true,
+                message: "Login successful",
+                token: token
+            })
+        } else {
+            res.send('Invalid password')
+        }
+    } else {
         res.status(401).json({
             success: false,
-            message: "Auth failed with error",
+            message: "Auth failed"
         })
-        console.log(err)
     }
 })
 
