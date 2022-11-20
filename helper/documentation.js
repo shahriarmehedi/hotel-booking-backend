@@ -12,6 +12,7 @@ const swaggerDocumentation = {
         servers: ["https://hotel-booking-backend-ngyx.onrender.com/api-docs/"],
     },
 
+
     servers: [
         {
             url: 'https://hotel-booking-backend-ngyx.onrender.com/',
@@ -23,6 +24,8 @@ const swaggerDocumentation = {
         },
 
     ],
+
+
 
 
 
@@ -43,6 +46,26 @@ const swaggerDocumentation = {
         {
             name: 'Hotel',
             description: 'API for hotels in the system',
+        },
+        {
+            name: 'Amenities',
+            description: 'API for amenities in the system',
+        },
+        {
+            name: 'Hotel Room',
+            description: 'API for hotel rooms in the system',
+        },
+        {
+            name: 'Hotel Room Type',
+            description: 'API for hotel room types in the system',
+        },
+        {
+            name: 'Hotel Review',
+            description: 'API for hotel reviews in the system',
+        },
+        {
+            name: 'Booking',
+            description: 'API for bookings in the system',
         }
     ],
 
@@ -477,6 +500,364 @@ const swaggerDocumentation = {
                 },
             },
         },
+
+        '/hotelRoom': {
+            get: {
+                tags: ['Hotel Room'],
+                summary: 'Get all hotel rooms',
+                description: 'Get all hotel rooms',
+                operationId: 'getHotelRooms',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel rooms were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelRoom',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Hotel Room'],
+                description: 'Create hotel room',
+                summary: 'Create hotel room',
+                operationId: 'createHotelRoom',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/HotelRoom',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Hotel room created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelRoom',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
+        '/hotelRoom/{id}': {
+            get: {
+                tags: ['Hotel Room'],
+                summary: 'Get hotel room by id',
+                description: 'Get hotel room by id',
+                operationId: 'getHotelRoomById',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of hotel room to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel room was obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelRoom',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            put: {
+                tags: ['Hotel Room'],
+                description: 'Update hotel room',
+                summary: 'Update hotel room by id',
+                operationId: 'updateHotelRoom',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/HotelRoom',
+                            },
+                        },
+                    },
+                },
+                responses: {
+                    '200': {
+                        description: 'Hotel room updated',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelRoom',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            delete: {
+                tags: ['Hotel Room'],
+                description: 'Delete hotel room',
+                summary: 'Delete hotel room by id',
+                operationId: 'deleteHotelRoom',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of hotel room to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel room deleted',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelRoom',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
+        '/hotelRoomType': {
+            get: {
+                tags: ['Hotel Room Type'],
+                summary: 'Get all hotel room types',
+                description: 'Get all hotel room types',
+                operationId: 'getHotelRoomTypes',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel room types were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelRoomType',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Hotel Room Type'],
+                description: 'Create hotel room type',
+                summary: 'Create hotel room type',
+                operationId: 'createHotelRoomType',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/HotelRoomType',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Hotel room type created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelRoomType',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+
+            '/hotelRoomType/{id}': {
+                get: {
+                    tags: ['Hotel Room Type'],
+                    summary: 'Get hotel room type by id',
+                    description: 'Get hotel room type by id',
+                    operationId: 'getHotelRoomTypeById',
+                    parameters: [
+                        {
+                            name: 'id',
+                            in: 'path',
+                            description: 'ID of hotel room type to return',
+                            required: true,
+                            schema: {
+                                type: 'string',
+                            },
+                        },
+                    ],
+                    security: [
+                        {
+                            bearerAuth: [],
+                        },
+                    ],
+                    responses: {
+                        '200': {
+                            description: 'Hotel room type was obtained',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        $ref: '#/components/schemas/HotelRoomType',
+                                    },
+                                },
+                            },
+                        },
+                        '500': {
+                            description: 'Server error',
+                        },
+                    },
+                },
+                put: {
+                    tags: ['Hotel Room Type'],
+                    description: 'Update hotel room type',
+                    summary: 'Update hotel room type by id',
+                    operationId: 'updateHotelRoomType',
+                    parameters: [],
+                    security: [
+                        {
+                            bearerAuth: [],
+                        },
+                    ],
+                    requestBody: {
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelRoomType',
+                                },
+                            },
+                        },
+                    },
+                    responses: {
+                        '200': {
+                            description: 'Hotel room type updated',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        $ref: '#/components/schemas/HotelRoomType',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                delete: {
+                    tags: ['Hotel Room Type'],
+                    description: 'Delete hotel room type',
+                    summary: 'Delete hotel room type by id',
+                    operationId: 'deleteHotelRoomType',
+                    parameters: [
+                        {
+                            name: 'id',
+                            in: 'path',
+                            description: 'ID of hotel room type to return',
+                            required: true,
+                            schema: {
+                                type: 'string',
+                            },
+                        },
+                    ],
+                    security: [
+                        {
+                            bearerAuth: [],
+                        },
+                    ],
+                    responses: {
+                        '200': {
+                            description: 'Hotel room type deleted',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        $ref: '#/components/schemas/HotelRoomType',
+                                    },
+                                },
+                            },
+                        },
+                        '500': {
+                            description: 'Server error',
+                        },
+                    },
+                },
+
+            },
+
+        },
+
 
 
     },

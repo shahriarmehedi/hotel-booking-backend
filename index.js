@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./helper/documentation');
 
+
 // use swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -31,11 +32,34 @@ const signupRoutes = require('./routes/Signup');
 // hotel routes
 const hotelRoutes = require('./routes/Hotel');
 
+// hotel review routes
+const hotelReviewRoutes = require('./routes/HotelReview');
+
+// Amenities routes
+const amenitiesRoutes = require('./routes/Amenities');
+
+// Hotel Room routes
+const hotelRoomRoutes = require('./routes/HotelRoom');
+
+// Room Type routes
+const roomTypeRoutes = require('./routes/RoomType');
+
+// Booking routes
+// const bookingRoutes = require('./routes/Booking');
+
+
+// USE ALL ROUTES
 
 app.use('/user', userRoutes);
 app.use('/login', loginRoutes);
 app.use('/signup', signupRoutes);
 app.use('/hotel', hotelRoutes);
+app.use('/hotelReview', hotelReviewRoutes);
+app.use('/amenities', amenitiesRoutes);
+app.use('/hotelRoom', hotelRoomRoutes);
+app.use('/hotelRoomType', roomTypeRoutes);
+// app.use('/booking', bookingRoutes);
+
 
 
 // MIDDLEWARE
