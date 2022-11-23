@@ -44,8 +44,11 @@ const hotelRoomRoutes = require('./routes/HotelRoom');
 // Room Type routes
 const roomTypeRoutes = require('./routes/RoomType');
 
+// Halal Rating routes
+const halalRatingRoutes = require('./routes/HalalRating');
+
 // Booking routes
-// const bookingRoutes = require('./routes/Booking');
+const bookingRoutes = require('./routes/Booking');
 
 
 // USE ALL ROUTES
@@ -58,7 +61,8 @@ app.use('/hotelReview', hotelReviewRoutes);
 app.use('/amenities', amenitiesRoutes);
 app.use('/hotelRoom', hotelRoomRoutes);
 app.use('/hotelRoomType', roomTypeRoutes);
-// app.use('/booking', bookingRoutes);
+app.use('/halalRating', halalRatingRoutes);
+app.use('/booking', bookingRoutes);
 
 
 

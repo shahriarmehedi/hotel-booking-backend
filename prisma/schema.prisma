@@ -66,6 +66,16 @@ model Hotel {
   Amenities   Amenities[]
 }
 
+model halalRating {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  addedBy     String?
+  percentage  Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model HotelRoom {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String

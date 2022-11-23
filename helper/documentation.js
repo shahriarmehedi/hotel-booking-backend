@@ -25,10 +25,6 @@ const swaggerDocumentation = {
 
     ],
 
-
-
-
-
     tags: [
 
         {
@@ -58,6 +54,10 @@ const swaggerDocumentation = {
         {
             name: 'Hotel Room Type',
             description: 'API for hotel room types in the system',
+        },
+        {
+            name: 'Halal Rating',
+            description: 'API for halal ratings in the system',
         },
         {
             name: 'Hotel Review',
@@ -1076,9 +1076,152 @@ const swaggerDocumentation = {
         },
 
 
+        '/halalRating': {
+            get: {
+                tags: ['Halal Rating'],
+                summary: 'Get all halal ratings',
+                description: 'Get all halal ratings',
+                operationId: 'getHalalRatings',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Halal ratings were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HalalRating',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Halal Rating'],
+                description: 'Create halal rating',
+                summary: 'Create halal rating',
+                operationId: 'createHalalRating',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/HalalRating',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Halal rating created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HalalRating',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
 
-
-
+        '/halalRating/{id}': {
+            put: {
+                tags: ['Halal Rating'],
+                description: 'Update halal rating',
+                summary: 'Update halal rating',
+                operationId: 'updateHalalRating',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of halal rating to update',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/HalalRating',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '200': {
+                        description: 'Halal rating updated',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HalalRating',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            delete: {
+                tags: ['Halal Rating'],
+                description: 'Delete halal rating',
+                summary: 'Delete halal rating',
+                operationId: 'deleteHalalRating',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of halal rating to delete',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Halal rating deleted',
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
 
 
 
@@ -1367,6 +1510,30 @@ const swaggerDocumentation = {
                     }
                 },
             },
+
+            HalalReview: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the halal review',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the halal review',
+                    },
+                    addedBy: {
+                        type: 'string',
+                        description: 'Added by of the halal review',
+                    },
+                    percentage: {
+                        type: 'number',
+                        description: 'Percentage of the halal review',
+                    },
+                },
+            },
+
+
         },
 
     },
