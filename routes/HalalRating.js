@@ -161,3 +161,5 @@ router.delete('/:id', checkLogin, async (req, res) => {
     }
 
 })
+
+module.exports = router;
