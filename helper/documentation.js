@@ -991,13 +991,99 @@ const swaggerDocumentation = {
                         description: 'Thumbnail of the hotel',
                     },
                 },
-
-
-
-
-
             },
 
+            HotelRoom: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the hotel room',
+                    },
+                    hotelId: {
+                        type: 'string',
+                        description: 'Hotel id of the hotel room',
+                    },
+                    size: {
+                        type: 'number',
+                        description: 'Size of the hotel room',
+                    },
+                    price: {
+                        type: 'number',
+                        description: 'Price of the hotel room',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the hotel room',
+                    },
+                    image: {
+                        type: 'string',
+                        description: 'Image of the hotel room',
+                    },
+                    thumbnail: {
+                        type: 'string',
+                        description: 'Thumbnail of the hotel room',
+                    },
+                    adults: {
+                        type: 'number',
+                        description: 'Adults of the hotel room',
+                    },
+                    children: {
+                        type: 'number',
+                        description: 'Children of the hotel room',
+                    },
+                },
+            },
+
+            HotelRoomType: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the hotel room type',
+                    },
+                    hotelId: {
+                        type: 'string',
+                        description: 'Hotel id of the hotel room type',
+                    },
+                    hotelRoomId: {
+                        type: 'string',
+                        description: 'Hotel room id of the hotel room type',
+                    },
+                    price: {
+                        type: 'number',
+                        description: 'Price of the hotel room type',
+                    },
+                    bed: {
+                        type: 'string',
+                        description: 'Bed of the hotel room type',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the hotel room type',
+                    },
+                    image: {
+                        type: 'string',
+                        description: 'Image of the hotel room type',
+                    },
+                    thumbnail: {
+                        type: 'string',
+                        description: 'Thumbnail of the hotel room type',
+                    },
+                    payment: {
+                        type: 'string',
+                        description: 'Payment of the hotel room type',
+                    },
+                    cancellation: {
+                        type: 'string',
+                        description: 'Cancellation of the hotel room type',
+                    },
+                    meals: {
+                        type: 'string',
+                        description: 'Meals of the hotel room type',
+                    },
+                },
+            },
         },
     },
 
