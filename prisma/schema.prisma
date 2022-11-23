@@ -34,25 +34,15 @@ model HotelReview {
 }
 
 model Amenities {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  name            String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  Hotel           Hotel?   @relation(fields: [hotelId], references: [id])
-  hotelId         String?  @db.ObjectId
-  freewifi        Boolean?
-  freeparking     Boolean?
-  pool            Boolean?
-  spa             Boolean?
-  gym             Boolean?
-  bar             Boolean?
-  freebar         Boolean?
-  restaurant      Boolean?
-  roomservice     Boolean?
-  laundry         Boolean?
-  breakfast       Boolean?
-  airconditioning Boolean?
-  minibar         Boolean?
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  price       Int?
+  free        Boolean?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Hotel       Hotel?   @relation(fields: [hotelId], references: [id])
+  hotelId     String?  @db.ObjectId
 }
 
 model Hotel {

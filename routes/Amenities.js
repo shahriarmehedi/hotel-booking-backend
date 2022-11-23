@@ -8,13 +8,6 @@ const prisma = new PrismaClient()
 
 router.get('/', checkLogin, async (req, res) => {
     try {
-        // get LoggedIn user
-        const loggedInUser = await prisma.user.findUnique({
-            where: {
-                id: req.user.id
-            }
-        })
-
         // user can get all amenities
 
         try {
@@ -59,17 +52,14 @@ router.post('/', checkLogin, async (req, res) => {
 
         if (loggedInUser.role === 'ADMIN') {
             try {
-                const { name, hotelId, freewifi, freeparking, breakfast, restaurant, pool, gym } = req.body
+                const { name, hotelId, free, price, description } = req.body
                 const amenities = await prisma.amenities.create({
                     data: {
-                        name: name,
-                        hotelId: hotelId,
-                        freewifi: freewifi || false,
-                        freeparking: freeparking || false,
-                        breakfast: breakfast || false,
-                        restaurant: restaurant || false,
-                        pool: pool || false,
-                        gym: gym || false
+                        name,
+                        hotelId,
+                        free,
+                        description,
+                        price: price || 0
                     }
                 })
                 res.status(201).json({

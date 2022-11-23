@@ -859,6 +859,74 @@ const swaggerDocumentation = {
         },
 
 
+        '/amenities': {
+            get: {
+                tags: ['Amenities'],
+                summary: 'Get all amenities',
+                description: 'Get all amenities',
+                operationId: 'getAmenities',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Amenities were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Amenities',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Amenities'],
+                description: 'Create amenities',
+                summary: 'Create amenities',
+                operationId: 'createAmenities',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+            },
+            requestBody: {
+                content: {
+                    'application/json': {
+                        schema: {
+                            $ref: '#/components/schemas/Amenities',
+                        },
+                    },
+                },
+                required: true,
+            },
+            responses: {
+                '201': {
+                    description: 'Amenities created',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Amenities',
+                            },
+                        },
+                    },
+                },
+                '500': {
+                    description: 'Server error',
+                },
+            },
+        },
+
+
 
     },
 
@@ -1084,6 +1152,33 @@ const swaggerDocumentation = {
                     },
                 },
             },
+
+            Amenities: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the amenities',
+                    },
+                    hotelId: {
+                        type: 'string',
+                        description: 'Hotel id of the amenities',
+                    },
+                    free: {
+                        type: 'boolean',
+                        description: 'Is free or not',
+                    },
+                    price: {
+                        type: 'number',
+                        description: 'Price of the amenities',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the amenities',
+                    },
+                },
+            },
+
         },
     },
 
