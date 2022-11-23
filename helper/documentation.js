@@ -927,6 +927,161 @@ const swaggerDocumentation = {
         },
 
 
+        '/hotelReview': {
+            get: {
+                tags: ['Hotel Review'],
+                summary: 'Get all hotel reviews',
+                description: 'Get all hotel reviews',
+                operationId: 'getHotelReviews',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel reviews were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelReview',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Hotel Review'],
+                description: 'Create hotel review',
+                summary: 'Create hotel review',
+                operationId: 'createHotelReview',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/HotelReview',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Hotel review created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelReview',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
+        '/hotelReview/{hotelId}': {
+            get: {
+                tags: ['Hotel Review'],
+                summary: 'Get all hotel review of a hotel',
+                description: 'Get hotel review by id',
+                operationId: 'getHotelReviewById',
+                parameters: [
+                    {
+                        name: 'hotelId',
+                        in: 'path',
+                        description: 'ID of hotel review to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel review was obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelReview',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+
+            },
+        },
+
+        '/hotelReview/{userId}': {
+            get: {
+                tags: ['Hotel Review'],
+                summary: 'Get all hotel review of a user',
+                description: 'Get hotel review by id',
+                operationId: 'getHotelReviewByUserId',
+                parameters: [
+                    {
+                        name: 'userId',
+                        in: 'path',
+                        description: 'ID of hotel review to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Hotel review was obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HotelReview',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
+
+
+
+
+
+
+
 
     },
 
@@ -1179,7 +1334,41 @@ const swaggerDocumentation = {
                 },
             },
 
+            HotelReview: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the hotel review',
+                    },
+                    hotelId: {
+                        type: 'string',
+                        description: 'Hotel id of the hotel review',
+                    },
+                    userId: {
+                        type: 'string',
+                        description: 'User id of the hotel review',
+                    },
+                    rating: {
+                        type: 'number',
+                        description: 'Rating of the hotel review',
+                    },
+                    review: {
+                        type: 'string',
+                        description: 'Review of the hotel review',
+                    },
+                    title: {
+                        type: 'string',
+                        description: 'Title of the hotel review',
+                    },
+                    hotelName: {
+                        type: 'string',
+                        description: 'Hotel name of the hotel review',
+                    }
+                },
+            },
         },
+
     },
 
 };

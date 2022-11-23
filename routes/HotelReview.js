@@ -83,6 +83,33 @@ router.get('/:hotelId', checkLogin, async (req, res) => {
 
 })
 
+// GET ONE USERS ALL REVIEWS
+
+router.get('/:userId', checkLogin, async (req, res) => {
+    try {
+        // get single user reviews
+        const userReviews = await prisma.hotelReview.findMany({
+            where: {
+                userId: req.params.userId
+            }
+        })
+        res.status(200).json({
+            success: true,
+            message: 'Requested user reviews fetched successfully',
+            userReviews: userReviews
+        })
+    }
+    catch (err) {
+        res.status(404).json({
+            success: false,
+            message: 'Unable to fetch user reviews',
+            error: err
+        })
+    }
+
+})
+
+
 
 
 // POST HOTEL REVIEW 
