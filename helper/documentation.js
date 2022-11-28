@@ -64,6 +64,10 @@ const swaggerDocumentation = {
             description: 'API for hotel reviews in the system',
         },
         {
+            name: 'Activities',
+            description: 'API for activities in the system',
+        },
+        {
             name: 'Booking',
             description: 'API for bookings in the system',
         }
@@ -1223,8 +1227,72 @@ const swaggerDocumentation = {
             },
         },
 
-
-
+        'activities': {
+            get: {
+                tags: ['Activities'],
+                summary: 'Get all activities',
+                description: 'Get all activities',
+                operationId: 'getActivities',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Activities were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Activities',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Activities'],
+                description: 'Create activity',
+                summary: 'Create activity',
+                operationId: 'createActivity',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Activities',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Activity created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Activities',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
 
     },
 
@@ -1317,7 +1385,7 @@ const swaggerDocumentation = {
                         description: 'Rating of the hotel',
                     },
                     halalRating: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Halal rating of the hotel',
 
                     },
@@ -1371,7 +1439,7 @@ const swaggerDocumentation = {
                         description: 'Hotel id of the hotel room',
                     },
                     size: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Size of the hotel room',
                     },
                     price: {
@@ -1511,7 +1579,7 @@ const swaggerDocumentation = {
                 },
             },
 
-            HalalReview: {
+            HalalRating: {
                 type: 'object',
                 properties: {
                     name: {
@@ -1533,8 +1601,62 @@ const swaggerDocumentation = {
                 },
             },
 
+            Activities: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the activities',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the activities',
+                    },
+                    rating: {
+                        type: 'string',
+                        description: 'Rating of the activities',
+                    },
+                    halalRating: {
+                        type: 'string',
+                        description: 'Halal rating of the activities',
+                    },
+                    price: {
+                        type: 'number',
+                        description: 'Price of the activities',
+                    },
+                    image: {
+                        type: 'string',
+                        description: 'Image of the activities',
+                    },
+                    instantConf: {
+                        type: 'boolean',
+                        description: 'Instant confirmation of the activities',
+                    },
+                    freeCancel: {
+                        type: 'boolean',
+                        description: 'Free cancellation of the activities',
+                    },
+                    date: {
+                        type: 'string',
+                        description: 'Date of the activities',
+                    },
+                    adults: {
+                        type: 'number',
+                        description: 'Adults of the activities',
+                    },
+                    children: {
+                        type: 'number',
+                        description: 'Children of the activities',
+                    },
+                },
+            },
+
+
+
 
         },
+
+
 
     },
 

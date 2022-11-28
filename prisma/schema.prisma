@@ -50,7 +50,7 @@ model Hotel {
   name        String
   description String
   rating      Int
-  halalRating Int
+  halalRating String
   price       Int
   image       String
   gallery     String[]
@@ -122,4 +122,22 @@ model Booking {
   HotelRoom   HotelRoom @relation(fields: [hotelRoomId], references: [id])
   hotelRoomId String    @db.ObjectId
   thumbnail   String
+}
+
+model Activities {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  price       Int      @default(0)
+  image       String
+  halalRating String
+  instantConf Boolean  @default(false)
+  freeCancel  Boolean  @default(false)
+  date        String
+  adults      Int      @default(1)
+  children    Int      @default(0)
+  rating      String   @default("0")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  thumbnail   String?
 }
