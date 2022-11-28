@@ -141,3 +141,18 @@ model Activities {
   updatedAt   DateTime @updatedAt
   thumbnail   String?
 }
+
+model Transfers {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  route       String
+  vehicles    Int
+  name        String
+  description String?
+  price       Int      @default(0)
+  image       String
+  vehicleType String
+  rating      String   @default("0")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  thumbnail   String?
+}

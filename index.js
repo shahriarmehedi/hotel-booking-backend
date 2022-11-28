@@ -53,6 +53,9 @@ const halalRatingRoutes = require('./routes/HalalRating');
 // Activity routes
 const activityRoutes = require('./routes/Activities');
 
+// Transfers routes
+const transfersRoutes = require('./routes/Transfers');
+
 
 // USE ALL ROUTES
 
@@ -66,6 +69,7 @@ app.use('/hotelRoom', hotelRoomRoutes);
 app.use('/hotelRoomType', roomTypeRoutes);
 app.use('/halalRating', halalRatingRoutes);
 app.use('/activities', activityRoutes);
+app.use('/transfers', transfersRoutes);
 // app.use('/booking', bookingRoutes);
 
 

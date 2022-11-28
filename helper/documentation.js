@@ -68,6 +68,10 @@ const swaggerDocumentation = {
             description: 'API for activities in the system',
         },
         {
+            name: 'Transfers',
+            description: 'API for transfers in the system',
+        },
+        {
             name: 'Booking',
             description: 'API for bookings in the system',
         }
@@ -1227,7 +1231,7 @@ const swaggerDocumentation = {
             },
         },
 
-        'activities': {
+        '/activities': {
             get: {
                 tags: ['Activities'],
                 summary: 'Get all activities',
@@ -1292,6 +1296,74 @@ const swaggerDocumentation = {
                     },
                 },
             },
+        },
+
+        '/transfers': {
+            get: {
+                tags: ['Transfers'],
+                summary: 'Get all transfers',
+                description: 'Get all transfers',
+                operationId: 'getTransfers',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Transfers were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Transfers',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Transfers'],
+                description: 'Create transfer',
+                summary: 'Create transfer',
+                operationId: 'createTransfer',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Transfers',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Transfer created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Transfers',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+
         },
 
     },
@@ -1651,12 +1723,55 @@ const swaggerDocumentation = {
                 },
             },
 
+            Transfers: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the transfers',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the transfers',
+                    },
+                    rating: {
+                        type: 'string',
+                        description: 'Rating of the transfers',
+                    },
+                    price: {
+                        type: 'number',
+                        description: 'Price of the transfers',
+                    },
+                    image: {
+                        type: 'string',
+                        description: 'Image of the transfers',
+                    },
+                    route: {
+                        type: 'string',
+                        description: 'Route of the transfers',
+                    },
+                    vehicles: {
+                        type: 'number',
+                        description: 'Vehicles of the transfers',
+                    },
+                    vehicleType: {
+                        type: 'string',
+                        description: 'Vehicle type of the transfers',
+                    },
+                },
+
+            },
+
+
+
+
+
+
+
 
 
 
         },
-
-
 
     },
 
