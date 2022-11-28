@@ -72,9 +72,17 @@ const swaggerDocumentation = {
             description: 'API for transfers in the system',
         },
         {
+            name: 'Holiday Packages',
+            description: 'API for holiday packages in the system',
+        },
+        {
+            name: 'Insurances',
+            description: 'API for insurances in the system',
+        },
+        {
             name: 'Booking',
             description: 'API for bookings in the system',
-        }
+        },
     ],
 
     paths: {
@@ -1366,8 +1374,145 @@ const swaggerDocumentation = {
 
         },
 
-    },
+        '/insurances': {
+            get: {
+                tags: ['Insurances'],
+                summary: 'Get all insurances',
+                description: 'Get all insurances',
+                operationId: 'getInsurances',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
 
+
+
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Insurances were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Insurances',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+
+                },
+            },
+            post: {
+                tags: ['Insurances'],
+                description: 'Create insurance',
+                summary: 'Create insurance',
+                operationId: 'createInsurance',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Insurances',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Insurance created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Insurances',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
+        '/holidayPackages': {
+            get: {
+                tags: ['Holiday Packages'],
+                summary: 'Get all holiday packages',
+                description: 'Get all holiday packages',
+                operationId: 'getHolidayPackages',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Holiday packages were obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HolidayPackages',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+            post: {
+                tags: ['Holiday Packages'],
+                description: 'Create holiday package',
+                summary: 'Create holiday package',
+                operationId: 'createHolidayPackage',
+                parameters: [],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                requestBody: {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/HolidayPackages',
+                            },
+                        },
+                    },
+                    required: true,
+                },
+                responses: {
+                    '201': {
+                        description: 'Holiday package created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HolidayPackages',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
+    },
 
     components: {
         securitySchemes: {
@@ -1761,6 +1906,104 @@ const swaggerDocumentation = {
                 },
 
             },
+
+            Insurances: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the insurances',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the insurances',
+                    },
+                    rating: {
+                        type: 'string',
+                        description: 'Rating of the insurances',
+                    },
+                    price: {
+                        type: 'number',
+                        description: 'Price of the insurances',
+                    },
+                    image: {
+                        type: 'string',
+                        description: 'Image of the insurances',
+                    },
+                    instantConf: {
+                        type: 'boolean',
+                        description: 'Instant confirmation of the insurances',
+                    },
+                    freeCancel: {
+                        type: 'boolean',
+                        description: 'Free cancellation of the insurances',
+                    },
+                    halalRating: {
+                        type: 'string',
+                        description: 'Halal rating of the insurances',
+                    },
+                    area: {
+                        type: 'string',
+                        description: 'Area of the insurances',
+                    },
+                    package: {
+                        type: 'string',
+                        description: 'Package of the insurances',
+                    },
+
+                }
+            },
+
+            HolidayPackages: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string',
+                        description: 'Name of the holiday packages',
+                    },
+                    description: {
+                        type: 'string',
+                        description: 'Description of the holiday packages',
+                    },
+                    rating: {
+                        type: 'string',
+                        description: 'Rating of the holiday packages',
+                    },
+                    price: {
+                        type: 'number',
+                        description: 'Price of the holiday packages',
+                    },
+                    image: {
+                        type: 'string',
+                        description: 'Image of the holiday packages',
+                    },
+                    instantConf: {
+                        type: 'boolean',
+                        description: 'Instant confirmation of the holiday packages',
+                    },
+                    freeCancel: {
+                        type: 'boolean',
+                        description: 'Free cancellation of the holiday packages',
+                    },
+                    halalRating: {
+                        type: 'string',
+                        description: 'Halal rating of the holiday packages',
+                    },
+                    area: {
+                        type: 'string',
+                        description: 'Area of the holiday packages',
+                    },
+                    package: {
+                        type: 'string',
+                        description: 'Package of the holiday packages',
+                    },
+                    duration: {
+                        type: 'string',
+                        description: 'Duration of the holiday packages',
+                    },
+
+                }
+            }
 
 
 

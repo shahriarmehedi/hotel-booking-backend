@@ -156,3 +156,38 @@ model Transfers {
   updatedAt   DateTime @updatedAt
   thumbnail   String?
 }
+
+model Insurances {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  price       Int      @default(0)
+  image       String
+  rating      String   @default("0")
+  instantConf Boolean  @default(false)
+  freeCancel  Boolean  @default(false)
+  halalRating String
+  area        String
+  package     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  thumbnail   String?
+}
+
+model HolidayPackages {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  price       Int      @default(0)
+  image       String
+  rating      String   @default("0")
+  instantConf Boolean  @default(false)
+  freeCancel  Boolean  @default(false)
+  halalRating String
+  area        String?
+  duration    String
+  package     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  thumbnail   String?
+}

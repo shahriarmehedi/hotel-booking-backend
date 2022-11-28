@@ -56,6 +56,12 @@ const activityRoutes = require('./routes/Activities');
 // Transfers routes
 const transfersRoutes = require('./routes/Transfers');
 
+// Holiday Packages routes
+const holidayPackagesRoutes = require('./routes/HolidayPackages');
+
+// Insurance routes
+const insuranceRoutes = require('./routes/Insurances');
+
 
 // USE ALL ROUTES
 
@@ -70,6 +76,9 @@ app.use('/hotelRoomType', roomTypeRoutes);
 app.use('/halalRating', halalRatingRoutes);
 app.use('/activities', activityRoutes);
 app.use('/transfers', transfersRoutes);
+app.use('/holidayPackages', holidayPackagesRoutes);
+app.use('/insurances', insuranceRoutes);
+
 // app.use('/booking', bookingRoutes);
 
 
