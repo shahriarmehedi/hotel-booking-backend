@@ -1,0 +1,47 @@
+{
+    "name": "Example Hotel 1",
+    "description": "Here is some description",
+    "rating": "4.2",
+    "slug": "example_hotel_1",
+    "language": [
+        "Bengali",
+        "English",
+        "Arabic",
+        "Urdu"
+    ],
+    "halalRatingTotal": "90",
+    "halalRating": [
+        {
+            "name": "halal Rating Parameter 1",
+            "perentage": "50"
+        },
+        {
+            "name": "halal Rating Parameter 2",
+            "perentage": "50"
+        }
+    ],
+    "price": "270",
+    "image": "https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGhvdGVsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+    "gallery": [
+        "https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGhvdGVsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+        "https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGhvdGVsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+        "https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGhvdGVsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+        "https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGhvdGVsfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+    ],
+    "location": "Dubai",
+    "city": "Dubai",
+    "address": "Anywhere in Dubai",
+    "country": "UAE",
+    "amenities": [
+        {
+            "name": "Amenities 1",
+            "price": "50",
+            "free": false
+        },
+        {
+            "name": "Amenities 2",
+            "price": "20",
+            "free": false
+        }
+    ]
+}

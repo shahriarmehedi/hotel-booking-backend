@@ -36,43 +36,43 @@ model HotelReview {
 model Amenities {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  price       Int?
+  price       String
   free        Boolean?
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Hotel       Hotel?   @relation(fields: [hotelId], references: [id])
-  hotelId     String?  @db.ObjectId
 }
 
 model Hotel {
-  id              String        @id @default(auto()) @map("_id") @db.ObjectId
-  name            String
-  description     String
-  rating          Int
-  halalRating     String
-  halalRatingInfo String[]
-  price           Int
-  image           String
-  gallery         String[]
-  location        String
-  city            String
-  address         String
-  country         String
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  hotelReview     HotelReview[]
-  thumbnail       String
-  hotelRoom       HotelRoom[]
-  Amenities       Amenities[]
+  id               String        @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  description      String?
+  rating           String
+  slug             String?
+  language         String[]
+  halalRatingTotal String
+  halalRating      Json
+  amenities        Json
+  price            String
+  image            String?
+  gallery          String[]
+  location         String
+  city             String
+  address          String
+  country          String
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  hotelReview      HotelReview[]
+  thumbnail        String?
+  hotelRoom        HotelRoom[]
 }
 
-model halalRating {
+model HalalRating {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
   addedBy     String?
-  percentage  Int
+  percentage  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -84,7 +84,7 @@ model HotelRoom {
   size        String
   adults      Int
   children    Int
-  price       Int
+  price       String
   image       String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
@@ -99,7 +99,7 @@ model RoomType {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   description  String
-  price        Int
+  price        String
   bed          String
   meals        String
   cancellation String
@@ -116,7 +116,7 @@ model Booking {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
-  price       Int
+  price       String
   image       String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -129,14 +129,14 @@ model Activities {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
-  price       Int      @default(0)
+  price       String
   image       String
   halalRating String
   instantConf Boolean  @default(false)
   freeCancel  Boolean  @default(false)
   date        String
-  adults      Int      @default(1)
-  children    Int      @default(0)
+  adults      Int
+  children    Int
   rating      String   @default("0")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -149,10 +149,10 @@ model Transfers {
   vehicles    Int
   name        String
   description String?
-  price       Int      @default(0)
+  price       String
   image       String
   vehicleType String
-  rating      String   @default("0")
+  rating      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   thumbnail   String?
@@ -162,9 +162,9 @@ model Insurances {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
-  price       Int      @default(0)
+  price       String
   image       String
-  rating      String   @default("0")
+  rating      String
   instantConf Boolean  @default(false)
   freeCancel  Boolean  @default(false)
   halalRating String
@@ -179,9 +179,9 @@ model HolidayPackages {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
-  price       Int      @default(0)
+  price       String
   image       String
-  rating      String   @default("0")
+  rating      String
   instantConf Boolean  @default(false)
   freeCancel  Boolean  @default(false)
   halalRating String

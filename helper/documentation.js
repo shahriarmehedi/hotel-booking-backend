@@ -1598,7 +1598,7 @@ const swaggerDocumentation = {
                         description: 'Description of the hotel',
                     },
                     rating: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Rating of the hotel',
                     },
                     halalRating: {
@@ -1610,8 +1610,19 @@ const swaggerDocumentation = {
                         description: 'Halal rating info of the hotel',
                     },
                     price: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Price of the hotel',
+                    },
+                    slug: {
+                        type: 'string',
+                        description: 'Slug of the hotel',
+                    },
+                    language: {
+                        type: 'array of strings',
+                        description: 'Language of the hotel',
+                        items: {
+                            type: 'string',
+                        },
                     },
                     image: {
                         type: 'string',
@@ -1663,7 +1674,7 @@ const swaggerDocumentation = {
                         description: 'Size of the hotel room',
                     },
                     price: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Price of the hotel room',
                     },
                     description: {
@@ -1705,7 +1716,7 @@ const swaggerDocumentation = {
                         description: 'Hotel room id of the hotel room type',
                     },
                     price: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Price of the hotel room type',
                     },
                     bed: {
@@ -1755,7 +1766,7 @@ const swaggerDocumentation = {
                         description: 'Is free or not',
                     },
                     price: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Price of the amenities',
                     },
                     description: {
@@ -1781,7 +1792,7 @@ const swaggerDocumentation = {
                         description: 'User id of the hotel review',
                     },
                     rating: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Rating of the hotel review',
                     },
                     review: {
@@ -1815,7 +1826,7 @@ const swaggerDocumentation = {
                         description: 'Added by of the halal review',
                     },
                     percentage: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Percentage of the halal review',
                     },
                 },
@@ -1841,7 +1852,7 @@ const swaggerDocumentation = {
                         description: 'Halal rating of the activities',
                     },
                     price: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Price of the activities',
                     },
                     image: {
@@ -1887,7 +1898,7 @@ const swaggerDocumentation = {
                         description: 'Rating of the transfers',
                     },
                     price: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Price of the transfers',
                     },
                     image: {
@@ -1926,7 +1937,7 @@ const swaggerDocumentation = {
                         description: 'Rating of the insurances',
                     },
                     price: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Price of the insurances',
                     },
                     image: {
@@ -1973,7 +1984,7 @@ const swaggerDocumentation = {
                         description: 'Rating of the holiday packages',
                     },
                     price: {
-                        type: 'number',
+                        type: 'string',
                         description: 'Price of the holiday packages',
                     },
                     image: {

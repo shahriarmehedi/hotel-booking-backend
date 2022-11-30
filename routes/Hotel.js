@@ -142,16 +142,27 @@ router.post('/', checkLogin, async (req, res) => {
                         name: req.body.name,
                         description: req.body.description,
                         rating: req.body.rating,
+                        halalRatingTotal: req.body.halalRatingTotal,
                         halalRating: req.body.halalRating,
-                        halalRatingInfo: req.body.halalRatingInfo,
+
+
+
+                        halalRating: req.body.halalRating,
                         price: req.body.price,
                         image: req.body.image,
-                        thumbnail: req.body.thumbnail,
+                        slug: req.body.slug,
+                        language: req.body.language,
+                        thumbnail: req.body.thumbnail || null,
                         gallery: req.body.gallery,
                         location: req.body.location,
                         city: req.body.city,
                         address: req.body.address,
                         country: req.body.country,
+
+                        amenities: req.body.amenities,
+
+
+
                     }
                 })
                 res.status(201).json({
@@ -160,6 +171,7 @@ router.post('/', checkLogin, async (req, res) => {
                     hotel: hotel
                 })
             } catch (err) {
+                console.log(err)
                 res.status(404).json({
                     success: false,
                     message: 'Something went wrong',
