@@ -144,9 +144,6 @@ router.post('/', checkLogin, async (req, res) => {
                         rating: req.body.rating,
                         halalRatingTotal: req.body.halalRatingTotal,
                         halalRating: req.body.halalRating,
-
-
-
                         halalRating: req.body.halalRating,
                         price: req.body.price,
                         image: req.body.image,
@@ -158,11 +155,7 @@ router.post('/', checkLogin, async (req, res) => {
                         city: req.body.city,
                         address: req.body.address,
                         country: req.body.country,
-
                         amenities: req.body.amenities,
-
-
-
                     }
                 })
                 res.status(201).json({

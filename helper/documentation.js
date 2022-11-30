@@ -903,31 +903,24 @@ const swaggerDocumentation = {
                     },
                 },
             },
+
+
+            
+
             post: {
                 tags: ['Amenities'],
                 description: 'Create amenities',
                 summary: 'Create amenities',
                 operationId: 'createAmenities',
-                parameters: [],
+                parameters: [
+
+                ],
                 security: [
                     {
                         bearerAuth: [],
                     },
                 ],
-            },
-            requestBody: {
-                content: {
-                    'application/json': {
-                        schema: {
-                            $ref: '#/components/schemas/Amenities',
-                        },
-                    },
-                },
-                required: true,
-            },
-            responses: {
-                '201': {
-                    description: 'Amenities created',
+                requestBody: {
                     content: {
                         'application/json': {
                             schema: {
@@ -935,11 +928,25 @@ const swaggerDocumentation = {
                             },
                         },
                     },
+                    required: true,
                 },
-                '500': {
-                    description: 'Server error',
+                responses: {
+                    '201': {
+                        description: 'Amenities created',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Amenities',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
                 },
             },
+            
         },
 
 
@@ -1601,14 +1608,44 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Rating of the hotel',
                     },
-                    halalRating: {
+                    halalRatingTotal: {
                         type: 'string',
                         description: 'Halal rating of the hotel',
                     },
-                    halalRatingInfo: {
-                        type: 'array of strings',
-                        description: 'Halal rating info of the hotel',
+                    halalRating: {
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                name: {
+                                    type: 'string',
+                                    description: 'Name of the halal rating',
+                                },
+                                percentage: {
+                                    type: 'string',
+                                    description: 'Percentage of the halal rating',
+                                },
+                            },
+                        },
                     },
+                    amenities: {
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                name: {
+                                    type: 'string',
+                                    description: 'Name of the amenity',
+                                },
+                                price: {
+                                    type: 'string',
+                                    description: 'Price of the amenity',
+                                }
+                            },
+                        },
+
+                    },
+
                     price: {
                         type: 'string',
                         description: 'Price of the hotel',
