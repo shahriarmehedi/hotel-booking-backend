@@ -1604,7 +1604,10 @@ const swaggerDocumentation = {
                     halalRating: {
                         type: 'string',
                         description: 'Halal rating of the hotel',
-
+                    },
+                    halalRatingInfo: {
+                        type: 'array of strings',
+                        description: 'Halal rating info of the hotel',
                     },
                     price: {
                         type: 'number',

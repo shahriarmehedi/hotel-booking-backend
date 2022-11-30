@@ -143,6 +143,7 @@ router.post('/', checkLogin, async (req, res) => {
                         description: req.body.description,
                         rating: req.body.rating,
                         halalRating: req.body.halalRating,
+                        halalRatingInfo: req.body.halalRatingInfo,
                         price: req.body.price,
                         image: req.body.image,
                         thumbnail: req.body.thumbnail,
