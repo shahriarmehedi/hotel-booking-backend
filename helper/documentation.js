@@ -905,7 +905,7 @@ const swaggerDocumentation = {
             },
 
 
-            
+
 
             post: {
                 tags: ['Amenities'],
@@ -946,7 +946,7 @@ const swaggerDocumentation = {
                     },
                 },
             },
-            
+
         },
 
 
@@ -1793,10 +1793,6 @@ const swaggerDocumentation = {
                     name: {
                         type: 'string',
                         description: 'Name of the amenities',
-                    },
-                    hotelId: {
-                        type: 'string',
-                        description: 'Hotel id of the amenities',
                     },
                     free: {
                         type: 'boolean',
