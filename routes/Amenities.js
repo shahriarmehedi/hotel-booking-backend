@@ -52,13 +52,12 @@ router.post('/', checkLogin, async (req, res) => {
 
         if (loggedInUser.role === 'ADMIN') {
             try {
-                const { name, hotelId, free, price, description } = req.body
+                const { name, free, price, description } = req.body
                 const amenities = await prisma.amenities.create({
                     data: {
                         name,
-                        hotelId,
-                        free,
-                        description,
+                        free: free || false,
+                        description: description || '',
                         price: price || 0
                     }
                 })
