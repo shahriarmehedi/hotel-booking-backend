@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 
 router.get('/', checkLogin, async (req, res) => {
     try {
-        const roomTypes = await prisma.roomType.findMany()
+        const roomTypes = await prisma.hotelRoomType.findMany()
         res.status(200).json({
             success: true,
             message: 'All room types fetched successfully',
@@ -28,7 +28,7 @@ router.get('/', checkLogin, async (req, res) => {
 
 router.get('/:hotelId', checkLogin, async (req, res) => {
     try {
-        const roomTypes = await prisma.roomType.findMany({
+        const roomTypes = await prisma.hotelRoomType.findMany({
             where: {
                 hotelId: req.params.hotelId
             }
@@ -59,8 +59,8 @@ router.post('/', checkLogin, async (req, res) => {
             }
         })
         if (loggedInUser.role === 'ADMIN') {
-            const { name, description, price, bed, meals, thumbnail, cancellation, image } = req.body;
-            const roomType = await prisma.roomType.create({
+            const { name, description, price, bed, meals, thumbnail, cancellation, image, payment } = req.body;
+            const roomType = await prisma.hotelRoomType.create({
                 data: {
                     name: name,
                     description: description,
@@ -86,6 +86,7 @@ router.post('/', checkLogin, async (req, res) => {
         }
     }
     catch (err) {
+        console.log(err);
         res.status(500).json({
             success: false,
             message: 'Server error, unable to add room type',
@@ -105,24 +106,22 @@ router.put('/:id', checkLogin, async (req, res) => {
             }
         })
         if (loggedInUser.role === 'ADMIN') {
-            const { hotelId, name, description, price, bed, meals, thumbnail, cancellation, hotelRoomId, image } = req.body;
+            const { name, description, price, bed, meals, thumbnail, cancellation, image, payment } = req.body;
 
-            const roomType = await prisma.roomType.update({
+            const roomType = await prisma.hotelRoomType.update({
                 where: {
                     id: req.params.id
                 },
                 data: {
-                    hotelId: hotelId,
                     name: name,
-                    description: description,
+                    description: description || undefined,
                     price: price,
                     bed: bed,
-                    image: image,
+                    image: image || undefined,
                     payment: payment,
                     meals: meals,
                     thumbnail: thumbnail,
                     cancellation: cancellation,
-                    hotelRoomId: hotelRoomId,
                 }
             })
             res.status(200).json({
@@ -157,7 +156,7 @@ router.delete('/:id', checkLogin, async (req, res) => {
             }
         })
         if (loggedInUser.role === 'ADMIN') {
-            const roomType = await prisma.roomType.delete({
+            const roomType = await prisma.hotelRoomType.delete({
                 where: {
                     id: req.params.id
                 }

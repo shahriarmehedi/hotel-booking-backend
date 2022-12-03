@@ -92,7 +92,7 @@ model HotelRoom {
   thumbnail   String?
 }
 
-model RoomType {
+model HotelRoomType {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   description  String?
