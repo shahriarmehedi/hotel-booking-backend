@@ -1646,6 +1646,56 @@ const swaggerDocumentation = {
 
                     },
 
+                    roomType: {
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                name: {
+                                    type: 'string',
+                                    description: 'Name of the room type',
+                                },
+                                description: {
+                                    type: 'string',
+                                    description: 'Description of the room type',
+                                },
+                                price: {
+                                    type: 'string',
+                                    description: 'Price of the room type',
+                                },
+                                cancellation: {
+                                    type: 'string',
+                                    description: 'Cancellation of the room type',
+                                },
+                                payment: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'string',
+                                        description: 'Payment of the room type',
+                                    },
+                                },
+                                image: {
+                                    type: 'string',
+                                    description: 'Image of the room type',
+                                },
+                                bed: {
+                                    type: 'string',
+                                    description: 'Bed of the room type',
+                                },
+                                meals: {
+                                    type: 'string',
+                                    description: 'Meals of the room type',
+                                },
+
+
+                            },
+
+
+                        },
+
+                    },
+
+
                     price: {
                         type: 'string',
                         description: 'Price of the hotel',

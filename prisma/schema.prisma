@@ -64,7 +64,8 @@ model Hotel {
   updatedAt        DateTime      @updatedAt
   hotelReview      HotelReview[]
   thumbnail        String?
-  hotelRoom        HotelRoom[]
+  hotelRoom        Json
+  roomType         Json
 }
 
 model HalalRating {
@@ -78,7 +79,7 @@ model HalalRating {
 }
 
 model HotelRoom {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
   size        String
@@ -86,42 +87,34 @@ model HotelRoom {
   children    Int
   price       String
   image       String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  Hotel       Hotel      @relation(fields: [hotelId], references: [id])
-  hotelId     String     @db.ObjectId
-  thumbnail   String
-  roomType    RoomType[]
-  Booking     Booking[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  thumbnail   String?
 }
 
 model RoomType {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   name         String
-  description  String
+  description  String?
   price        String
   bed          String
   meals        String
   cancellation String
   payment      String[]
-  image        String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  HotelRoom    HotelRoom @relation(fields: [hotelRoomId], references: [id])
-  hotelRoomId  String    @db.ObjectId
+  image        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
   thumbnail    String
 }
 
 model Booking {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
   price       String
   image       String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  HotelRoom   HotelRoom @relation(fields: [hotelRoomId], references: [id])
-  hotelRoomId String    @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   thumbnail   String
 }
 
