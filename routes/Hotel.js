@@ -49,6 +49,7 @@ router.get('/', checkLogin, async (req, res) => {
         }
     }
     catch (err) {
+        console.log(err)
         res.status(500).json({
             success: false,
             message: 'Server error, unable to fetch hotels',
@@ -144,7 +145,7 @@ router.post('/', checkLogin, async (req, res) => {
                         rating: req.body.rating,
                         halalRatingTotal: req.body.halalRatingTotal,
                         halalRating: req.body.halalRating,
-                        halalRating: req.body.halalRating,
+                        roomType: req.body.roomType,
                         price: req.body.price,
                         image: req.body.image,
                         slug: req.body.slug,
@@ -207,18 +208,23 @@ router.put('/:id', checkLogin, async (req, res) => {
                         id: req.params.id
                     },
                     data: {
-                        name: req.body.name || hotel.name,
-                        description: req.body.description || hotel.description,
-                        rating: req.body.rating || hotel.rating,
-                        halalRating: req.body.halalRating || hotel.halalRating,
-                        price: req.body.price || hotel.price,
-                        image: req.body.image || hotel.image,
-                        thumbnail: req.body.thumbnail || hotel.thumbnail,
-                        gallery: req.body.gallery || hotel.gallery,
-                        location: req.body.location || hotel.location,
-                        city: req.body.city || hotel.city,
-                        address: req.body.address || hotel.address,
-                        country: req.body.country || hotel.country,
+                        name: req.body.name || null,
+                        description: req.body.description || null,
+                        rating: req.body.rating || null,
+                        halalRatingTotal: req.body.halalRatingTotal || null,
+                        halalRating: req.body.halalRating || null,
+                        roomType: req.body.roomType || null,
+                        price: req.body.price || null,
+                        image: req.body.image || null,
+                        slug: req.body.slug || null,
+                        language: req.body.language || null,
+                        thumbnail: req.body.thumbnail || null,
+                        gallery: req.body.gallery || null,
+                        location: req.body.location || null,
+                        city: req.body.city || null,
+                        address: req.body.address || null,
+                        country: req.body.country || null,
+                        amenities: req.body.amenities || null,
 
                     }
                 })

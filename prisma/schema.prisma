@@ -51,8 +51,8 @@ model Hotel {
   slug             String?
   language         String[]
   halalRatingTotal String
-  halalRating      Json
-  amenities        Json
+  halalRating      Json?
+  amenities        Json?
   price            String
   image            String?
   gallery          String[]
@@ -64,8 +64,8 @@ model Hotel {
   updatedAt        DateTime      @updatedAt
   hotelReview      HotelReview[]
   thumbnail        String?
-  hotelRoom        Json
-  roomType         Json
+  hotelRoom        Json?
+  roomType         Json?
 }
 
 model HalalRating {
