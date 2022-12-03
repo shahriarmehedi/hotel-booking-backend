@@ -1820,8 +1820,11 @@ const swaggerDocumentation = {
                         description: 'Thumbnail of the hotel room type',
                     },
                     payment: {
-                        type: 'string',
-                        description: 'Payment of the hotel room type',
+                        type: 'array',
+                        items: {
+                            type: 'string',
+                            description: 'Payment of the hotel room type',
+                        },
                     },
                     cancellation: {
                         type: 'string',
