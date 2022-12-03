@@ -59,10 +59,9 @@ router.post('/', checkLogin, async (req, res) => {
             }
         })
         if (loggedInUser.role === 'ADMIN') {
-            const { hotelId, name, description, price, bed, meals, thumbnail, cancellation, hotelRoomId, image } = req.body;
+            const { name, description, price, bed, meals, thumbnail, cancellation, image } = req.body;
             const roomType = await prisma.roomType.create({
                 data: {
-                    hotelId: hotelId,
                     name: name,
                     description: description,
                     price: price,
@@ -72,7 +71,6 @@ router.post('/', checkLogin, async (req, res) => {
                     meals: meals,
                     thumbnail: thumbnail,
                     cancellation: cancellation,
-                    hotelRoomId: hotelRoomId,
                 }
             })
             res.status(201).json({

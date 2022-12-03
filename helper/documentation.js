@@ -1686,6 +1686,10 @@ const swaggerDocumentation = {
                                     type: 'string',
                                     description: 'Meals of the room type',
                                 },
+                                thumbnail: {
+                                    type: 'string',
+                                    description: 'Thumbnail of the room type',
+                                },
 
 
                             },
@@ -1794,14 +1798,7 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Name of the hotel room type',
                     },
-                    hotelId: {
-                        type: 'string',
-                        description: 'Hotel id of the hotel room type',
-                    },
-                    hotelRoomId: {
-                        type: 'string',
-                        description: 'Hotel room id of the hotel room type',
-                    },
+
                     price: {
                         type: 'string',
                         description: 'Price of the hotel room type',
