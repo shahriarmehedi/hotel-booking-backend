@@ -151,7 +151,7 @@ router.post('/', checkLogin, async (req, res) => {
                         slug: req.body.slug,
                         language: req.body.language,
                         thumbnail: req.body.thumbnail || null,
-                        gallery: req.body.gallery,
+                        gallery: req.body.gallery || null,
                         location: req.body.location,
                         city: req.body.city,
                         address: req.body.address,

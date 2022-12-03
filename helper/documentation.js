@@ -1709,7 +1709,7 @@ const swaggerDocumentation = {
                         description: 'Slug of the hotel',
                     },
                     language: {
-                        type: 'array of strings',
+                        type: 'array',
                         description: 'Language of the hotel',
                         items: {
                             type: 'string',
