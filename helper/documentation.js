@@ -15,13 +15,17 @@ const swaggerDocumentation = {
 
     servers: [
         {
-            url: 'https://hotel-booking-backend-ngyx.onrender.com/',
+            url: 'https://hotel-booking-backend-ngyx.onrender.com',
             description: 'Test server',
         },
         {
             url: 'http://localhost:5000',
             description: 'Development server',
         },
+        {
+            url: 'http://51.195.118.174:5000',
+            description: 'Production'
+        }
 
     ],
 
