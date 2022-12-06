@@ -11,42 +11,14 @@ router.get('/', checkLogin, async (req, res) => {
 
 
     try {
-        // get LoggedIn user
-        const loggedInUser = await prisma.user.findUnique({
-            where: {
-                id: req.user.id
-            }
+
+        const hotels = await prisma.hotel.findMany()
+        res.status(200).json({
+            success: true,
+            message: 'All hotels fetched successfully',
+            hotels: hotels
         })
 
-        // ADMIN can get all hotels, user will get only his hotels
-        if (loggedInUser.role === 'ADMIN') {
-            const hotels = await prisma.hotel.findMany()
-            res.status(200).json({
-                success: true,
-                message: 'All hotels fetched successfully',
-                hotels: hotels
-            })
-        } else {
-            try {
-                const hotels = await prisma.hotel.findMany({
-                    where: {
-                        userId: req.user.id
-                    }
-                })
-                res.status(200).json({
-                    success: true,
-                    message: 'Requested hotels fetched successfully',
-                    hotels: hotels
-                })
-            }
-            catch (err) {
-                res.status(404).json({
-                    success: false,
-                    message: 'Unable to fetch hotels',
-                    error: err
-                })
-            }
-        }
     }
     catch (err) {
         console.log(err)
@@ -64,55 +36,28 @@ router.get('/', checkLogin, async (req, res) => {
 router.get('/:id', checkLogin, async (req, res) => {
 
     try {
-        // admin can get all hotels and user can only get his hotels
-        // GET LOGGED IN USER
-        const loggedInUser = await prisma.user.findUnique({
-            where: {
-                id: req.user.id
-            }
-        })
 
-        if (loggedInUser.role === 'ADMIN') {
-            try {
-                const hotel = await prisma.hotel.findUnique({
-                    where: {
-                        id: req.params.id
-                    }
-                })
-                res.status(200).json({
-                    success: true,
-                    message: 'Requested hotel fetched successfully',
-                    hotel: hotel
-                })
-            } catch (err) {
-                res.status(404).json({
-                    success: false,
-                    message: 'Unable to fetch requested hotel',
-                    error: err
-                })
-            }
-        } else {
-            try {
-                // if user request his own hotel then he can get it
-                const hotel = await prisma.hotel.findUnique({
-                    where: {
-                        id: req.params.id,
-                        userId: req.user.id
-                    }
-                })
-                res.status(200).json({
-                    success: true,
-                    message: 'Requested hotel fetched successfully',
-                    hotel: hotel
-                })
-            } catch (err) {
-                res.status(404).json({
-                    success: false,
-                    message: 'Unable to fetch requested hotel',
-                    error: err
-                })
-            }
+
+
+        try {
+            const hotel = await prisma.hotel.findUnique({
+                where: {
+                    id: req.params.id
+                }
+            })
+            res.status(200).json({
+                success: true,
+                message: 'Requested hotel fetched successfully',
+                hotel: hotel
+            })
+        } catch (err) {
+            res.status(404).json({
+                success: false,
+                message: 'Unable to fetch requested hotel',
+                error: err
+            })
         }
+
     }
     catch (err) {
         res.status(404).json({
