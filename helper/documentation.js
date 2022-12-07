@@ -24,9 +24,16 @@ const swaggerDocumentation = {
         },
         {
             url: 'http://51.195.118.174:5000',
-            description: 'Production'
+            description: 'Production 1'
+        },
+        {
+            url: 'http://51.195.118.174:6000',
+            description: 'Production 2'
+        },
+        {
+            url: 'http://51.195.118.174:8000/',
+            description: 'Production 3'
         }
-
     ],
 
     tags: [
