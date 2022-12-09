@@ -5,8 +5,8 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const port = process.env.PORT || 5000;
 
-const fileUpload = require('express-fileupload');
-app.use(fileUpload());
+// const fileUpload = require('express-fileupload');
+// app.use(fileUpload());
 
 // import swagger
 const swaggerUi = require('swagger-ui-express');

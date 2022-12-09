@@ -184,11 +184,13 @@ router.put('/:id', checkLogin, async (req, res) => {
         }
     }
     catch (err) {
+        console.log(err);
         res.status(404).json({
             success: false,
             message: 'Unable to update hotel',
             error: err
         })
+        console.log(err)
     }
 
 })

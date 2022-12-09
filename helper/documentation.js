@@ -210,7 +210,17 @@ const swaggerDocumentation = {
                 description: 'Update user',
                 summary: 'Update user by id',
                 operationId: 'updateUser',
-                parameters: [],
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of user to update',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
                 security: [
                     {
                         bearerAuth: [],
@@ -461,7 +471,17 @@ const swaggerDocumentation = {
                 description: 'Update hotel',
                 summary: 'Update hotel by id',
                 operationId: 'updateHotel',
-                parameters: [],
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of hotel to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
                 security: [
                     {
                         bearerAuth: [],
@@ -638,7 +658,17 @@ const swaggerDocumentation = {
                 description: 'Update hotel room',
                 summary: 'Update hotel room by id',
                 operationId: 'updateHotelRoom',
-                parameters: [],
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of hotel room to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
                 security: [
                     {
                         bearerAuth: [],
@@ -815,7 +845,18 @@ const swaggerDocumentation = {
                     description: 'Update hotel room type',
                     summary: 'Update hotel room type by id',
                     operationId: 'updateHotelRoomType',
-                    parameters: [],
+                    parameters: [
+                        {
+                            name: 'id',
+                            in: 'path',
+                            description: 'ID of hotel room type to return',
+                            required: true,
+                            schema: {
+                                type: 'string',
+                            },
+                        },
+
+                    ],
                     security: [
                         {
                             bearerAuth: [],
