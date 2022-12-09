@@ -2054,7 +2054,7 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Area of the insurances',
                     },
-                    package: {
+                    packageName: {
                         type: 'string',
                         description: 'Package of the insurances',
                     },
