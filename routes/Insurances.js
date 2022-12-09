@@ -44,7 +44,7 @@ router.post('/', checkLogin, async (req, res) => {
         // ADMIN can post insurance
         if (loggedInUser.role === 'ADMIN') {
 
-            const { name, description, price, image, rating, halalRating, freeCancel, instantConf, area, package } = req.body;
+            const { name, description, price, image, rating, halalRating, freeCancel, instantConf, area, packageName } = req.body;
 
             const insurance = await prisma.insurances.create({
                 data: {
@@ -57,7 +57,7 @@ router.post('/', checkLogin, async (req, res) => {
                     freeCancel: freeCancel,
                     instantConf: instantConf,
                     area: area,
-                    package: package
+                    packageName: packageName
 
                 }
             })

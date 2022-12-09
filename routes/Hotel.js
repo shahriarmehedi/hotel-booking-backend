@@ -8,17 +8,13 @@ const prisma = new PrismaClient()
 // GET ALL HOTELS
 
 router.get('/', checkLogin, async (req, res) => {
-
-
     try {
-
         const hotels = await prisma.hotel.findMany()
         res.status(200).json({
             success: true,
             message: 'All hotels fetched successfully',
             hotels: hotels
         })
-
     }
     catch (err) {
         console.log(err)
@@ -36,9 +32,6 @@ router.get('/', checkLogin, async (req, res) => {
 router.get('/:id', checkLogin, async (req, res) => {
 
     try {
-
-
-
         try {
             const hotel = await prisma.hotel.findUnique({
                 where: {
@@ -57,7 +50,6 @@ router.get('/:id', checkLogin, async (req, res) => {
                 error: err
             })
         }
-
     }
     catch (err) {
         res.status(404).json({
@@ -66,7 +58,6 @@ router.get('/:id', checkLogin, async (req, res) => {
             error: err
         })
     }
-
 })
 
 // CREATE HOTEL
@@ -153,23 +144,23 @@ router.put('/:id', checkLogin, async (req, res) => {
                         id: req.params.id
                     },
                     data: {
-                        name: req.body.name || null,
-                        description: req.body.description || null,
-                        rating: req.body.rating || null,
-                        halalRatingTotal: req.body.halalRatingTotal || null,
-                        halalRating: req.body.halalRating || null,
-                        roomType: req.body.roomType || null,
-                        price: req.body.price || null,
-                        image: req.body.image || null,
-                        slug: req.body.slug || null,
-                        language: req.body.language || null,
-                        thumbnail: req.body.thumbnail || null,
-                        gallery: req.body.gallery || null,
-                        location: req.body.location || null,
-                        city: req.body.city || null,
-                        address: req.body.address || null,
-                        country: req.body.country || null,
-                        amenities: req.body.amenities || null,
+                        name: req.body.name || hotel.name,
+                        description: req.body.description || hotel.description,
+                        rating: req.body.rating || hotel.rating,
+                        halalRatingTotal: req.body.halalRatingTotal || hotel.halalRatingTotal,
+                        halalRating: req.body.halalRating || hotel.halalRating,
+                        roomType: req.body.roomType || hotel.roomType,
+                        price: req.body.price || hotel.price,
+                        image: req.body.image || hotel.image,
+                        slug: req.body.slug || hotel.slug,
+                        language: req.body.language || hotel.language,
+                        thumbnail: req.body.thumbnail || hotel.thumbnail,
+                        gallery: req.body.gallery || hotel.gallery,
+                        location: req.body.location || hotel.location,
+                        city: req.body.city || hotel.city,
+                        address: req.body.address || hotel.address,
+                        country: req.body.country || hotel.country,
+                        amenities: req.body.amenities || hotel.amenities,
 
                     }
                 })

@@ -161,7 +161,7 @@ model Insurances {
   freeCancel  Boolean  @default(false)
   halalRating String
   area        String
-  package     String
+  packageName String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   thumbnail   String?
