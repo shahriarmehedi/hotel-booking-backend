@@ -2126,9 +2126,10 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Image of the holiday packages',
                     },
+
                     gallery: {
                         type: 'array',
-                        item: {
+                        items: {
                             type: 'string',
                             description: 'Gallery of the holiday packages',
                         },
@@ -2163,14 +2164,14 @@ const swaggerDocumentation = {
                     },
                     inclusions: {
                         type: 'array',
-                        item: {
+                        items: {
                             type: 'string',
                             description: 'Inclusions of the holiday packages',
                         },
                     },
                     exclusions: {
                         type: 'array',
-                        item: {
+                        items: {
                             type: 'string',
                             description: 'Exclusions of the holiday packages',
                         },
