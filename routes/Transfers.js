@@ -40,17 +40,18 @@ router.post('/', checkLogin, async (req, res) => {
         })
 
         if (loggedInUser.role === 'ADMIN') {
-            const { name, price, description, image, route, vehicles, vehicleType, rating } = req.body
+            const { name, price, description, image, routes, vehicles, vehicleType, rating, thumbnail } = req.body
             const transfer = await prisma.transfers.create({
                 data: {
-                    name: name,
-                    price: price,
+                    name: name || 'No name',
+                    price: price || 0,
                     description: description,
                     image: image,
-                    route: route,
+                    routes: routes,
                     vehicles: vehicles,
                     vehicleType: vehicleType,
-                    rating: rating
+                    rating: rating,
+                    thumbnail: thumbnail
                 }
             })
             res.status(201).json({
@@ -71,6 +72,7 @@ router.post('/', checkLogin, async (req, res) => {
             message: 'Server error, unable to create transfer',
             error: err
         })
+        console.log(err)
 
     }
 })

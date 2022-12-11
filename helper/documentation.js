@@ -2040,9 +2040,13 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Image of the transfers',
                     },
-                    route: {
-                        type: 'string',
-                        description: 'Route of the transfers',
+                    routes: {
+                        type: 'array',
+                        items: {
+                            type: 'string',
+                            description: 'Routes of the transfers',
+                        },
+
                     },
                     vehicles: {
                         type: 'number',
@@ -2051,6 +2055,10 @@ const swaggerDocumentation = {
                     vehicleType: {
                         type: 'string',
                         description: 'Vehicle type of the transfers',
+                    },
+                    thumbnail: {
+                        type: 'string',
+                        description: 'Thumbnail of the transfers',
                     },
                 },
 

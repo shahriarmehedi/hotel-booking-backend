@@ -80,6 +80,7 @@ router.post('/', checkLogin, async (req, res) => {
             message: 'Server error, unable to create holiday package',
             error: err
         })
+        console.log(err);
     }
 })
 

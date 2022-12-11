@@ -135,14 +135,14 @@ model Activities {
 
 model Transfers {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  route       String
-  vehicles    Int
+  routes      String[] @default([])
+  vehicles    Int?
   name        String
   description String?
   price       String
-  image       String
-  vehicleType String
-  rating      String
+  image       String?
+  vehicleType String?
+  rating      String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   thumbnail   String?
