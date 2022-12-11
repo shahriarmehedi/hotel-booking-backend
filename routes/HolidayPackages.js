@@ -40,21 +40,26 @@ router.post('/', checkLogin, async (req, res) => {
 
         // ADMIN can post a holiday package
         if (loggedInUser.role === 'ADMIN') {
-            const { name, description, price, image, rating, instantConf, freeCancel, halalRating, area, package, duration } = req.body;
+            const { name, description, price, image, gallery, rating, instantConf, freeCancel, halalRating, duration, from, to, airtime, inclusions, exclusions, groupsize, thumbnail } = req.body;
             const newHolidayPackage = await prisma.holidayPackages.create({
                 data: {
-                    name: name,
-                    description: description,
-                    price: price,
-                    image: image,
-                    rating: rating,
-                    instantConf: instantConf,
-                    freeCancel: freeCancel,
-                    halalRating: halalRating,
-                    area: area,
-                    package: package,
-                    duration: duration
-
+                    name: name || null,
+                    description: description || null,
+                    price: price || null,
+                    image: image || null,
+                    gallery: gallery || null,
+                    rating: rating || null,
+                    instantConf: instantConf || null,
+                    freeCancel: freeCancel || null,
+                    halalRating: halalRating || null,
+                    duration: duration || null,
+                    from: from,
+                    to: to || null,
+                    airtime: airtime || null,
+                    inclusions: inclusions || null,
+                    exclusions: exclusions || null,
+                    groupsize: groupsize || null,
+                    thumbnail: thumbnail || ""
                 }
             })
             res.status(200).json({

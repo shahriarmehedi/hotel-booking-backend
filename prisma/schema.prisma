@@ -54,7 +54,7 @@ model Hotel {
   amenities        Json?
   price            String
   image            String?
-  gallery          String[]
+  gallery          String[] @default([])
   location         String
   city             String
   address          String?
@@ -109,7 +109,7 @@ model Booking {
   name        String
   description String
   price       String
-  image       String
+  image       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   thumbnail   String
@@ -170,14 +170,19 @@ model HolidayPackages {
   name        String
   description String?
   price       String
-  image       String
-  rating      String
+  image       String?
+  gallery     String[] @default([])
+  rating      String?
   instantConf Boolean  @default(false)
   freeCancel  Boolean  @default(false)
-  halalRating String
-  area        String?
-  duration    String
-  package     String?
+  halalRating String?
+  duration    String?
+  from        String?
+  to          String?
+  airtime     String?
+  inclusions  String[] @default([])
+  exclusions  String[] @default([])
+  groupsize   String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   thumbnail   String?

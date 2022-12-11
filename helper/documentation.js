@@ -2126,6 +2126,13 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Image of the holiday packages',
                     },
+                    gallery: {
+                        type: 'array',
+                        item: {
+                            type: 'string',
+                            description: 'Gallery of the holiday packages',
+                        },
+                    },
                     instantConf: {
                         type: 'boolean',
                         description: 'Instant confirmation of the holiday packages',
@@ -2138,28 +2145,46 @@ const swaggerDocumentation = {
                         type: 'string',
                         description: 'Halal rating of the holiday packages',
                     },
-                    area: {
-                        type: 'string',
-                        description: 'Area of the holiday packages',
-                    },
-                    package: {
-                        type: 'string',
-                        description: 'Package of the holiday packages',
-                    },
                     duration: {
                         type: 'string',
                         description: 'Duration of the holiday packages',
                     },
-
+                    from: {
+                        type: 'string',
+                        description: 'From of the holiday packages',
+                    },
+                    to: {
+                        type: 'string',
+                        description: 'To of the holiday packages',
+                    },
+                    airtime: {
+                        type: 'string',
+                        description: 'Airtime of the holiday packages',
+                    },
+                    inclusions: {
+                        type: 'array',
+                        item: {
+                            type: 'string',
+                            description: 'Inclusions of the holiday packages',
+                        },
+                    },
+                    exclusions: {
+                        type: 'array',
+                        item: {
+                            type: 'string',
+                            description: 'Exclusions of the holiday packages',
+                        },
+                    },
+                    groupsize: {
+                        type: 'string',
+                        description: 'Groupsize of the holiday packages',
+                    },
+                    thumbnail: {
+                        type: 'string',
+                        description: 'Thumbnail of the holiday packages',
+                    },
                 }
             }
-
-
-
-
-
-
-
 
 
 
