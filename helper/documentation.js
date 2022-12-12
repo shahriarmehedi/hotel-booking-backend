@@ -1571,6 +1571,47 @@ const swaggerDocumentation = {
             },
         },
 
+        '/holidayPackages/{id}': {
+            get: {
+                tags: ['Holiday Packages'],
+                summary: 'Get holiday package by id',
+                description: 'Get holiday package by id',
+                operationId: 'getHolidayPackageById',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of holiday package to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Holiday package was obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/HolidayPackages',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+
+            },
+        },
+
     },
 
     components: {

@@ -26,6 +26,35 @@ router.get('/', checkLogin, async (req, res) => {
 
 })
 
+// GET SINGLE HOLIDAY PACKAGE (ALL USERS CAN ACCESS)
+
+router.get('/:id', checkLogin, async (req, res) => {
+
+    try {
+        const holidayPackage = await prisma.holidayPackages.findUnique({
+            where: {
+                id: req.params.id
+            }
+        })
+        res.status(200).json({
+            success: true,
+            message: 'Holiday package fetched successfully',
+            holidayPackage: holidayPackage
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error, unable to fetch holiday package',
+            error: err
+        })
+    }
+
+})
+
+
+
+
 // POST A HOLIDAY PACKAGE (ONLY ADMIN CAN ACCESS)
 
 router.post('/', checkLogin, async (req, res) => {
