@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 
 // GET ALL HOTELS
 
-router.get('/', checkLogin, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const hotels = await prisma.hotel.findMany()
         res.status(200).json({
@@ -29,7 +29,7 @@ router.get('/', checkLogin, async (req, res) => {
 
 // GET ONE HOTEL
 
-router.get('/:id', checkLogin, async (req, res) => {
+router.get('/:id', async (req, res) => {
 
     try {
         try {

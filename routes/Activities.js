@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 // GET ALL ACTIVITIES
 
-router.get('/', checkLogin, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const activities = await prisma.activities.findMany()
         res.status(200).json({

@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 // GET ALL INSURANCES
 
-router.get('/', checkLogin, async (req, res) => {
+router.get('/', async (req, res) => {
 
     try {
 

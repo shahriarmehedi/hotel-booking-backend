@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 // GET ALL HALAL RATINGS
 
-router.get('/', checkLogin, async (req, res) => {
+router.get('/', async (req, res) => {
 
     try {
 

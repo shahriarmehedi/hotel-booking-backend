@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 // GET ALL HOLIDAY PACKAGES (ALL USERS CAN ACCESS)
 
-router.get('/', checkLogin, async (req, res) => {
+router.get('/', async (req, res) => {
 
     try {
         const holidayPackages = await prisma.holidayPackages.findMany()
@@ -28,7 +28,7 @@ router.get('/', checkLogin, async (req, res) => {
 
 // GET SINGLE HOLIDAY PACKAGE (ALL USERS CAN ACCESS)
 
-router.get('/:id', checkLogin, async (req, res) => {
+router.get('/:id', async (req, res) => {
 
     try {
         const holidayPackage = await prisma.holidayPackages.findUnique({

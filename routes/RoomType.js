@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 // GET ALL ROOM TYPES
 
-router.get('/', checkLogin, async (req, res) => {
+router.get('/', async (req, res) => {
 
     try {
         const roomTypes = await prisma.hotelRoomType.findMany()
@@ -27,7 +27,7 @@ router.get('/', checkLogin, async (req, res) => {
 
 // GET ONE ROOM TYPE OF A HOTEL
 
-router.get('/:hotelId', checkLogin, async (req, res) => {
+router.get('/:hotelId', async (req, res) => {
     try {
         const roomTypes = await prisma.hotelRoomType.findMany({
             where: {

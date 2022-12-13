@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 // GET ALL TRANSFERS
 
-router.get('/', checkLogin, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
 
         const transfers = await prisma.transfers.findMany()
