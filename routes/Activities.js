@@ -24,6 +24,42 @@ router.get('/', async (req, res) => {
     }
 })
 
+
+// GET SINGLE ACTIVITY
+
+router.get('/:id', async (req, res) => {
+
+    try {
+        try {
+            const activity = await prisma.activities.findUnique({
+                where: {
+                    id: req.params.id
+                }
+            })
+            res.status(200).json({
+                success: true,
+                message: 'Requested activity fetched successfully',
+                activity: activity
+            })
+        } catch (err) {
+            res.status(404).json({
+                success: false,
+                message: 'Unable to fetch requested activity',
+                error: err
+            })
+        }
+    }
+    catch (err) {
+        res.status(404).json({
+            success: false,
+            message: 'Unable to fetch requested activity',
+            error: err
+        })
+    }
+})
+
+
+
 // POST ACTIVITY (ADMIN)
 
 router.post('/', checkLogin, async (req, res) => {
