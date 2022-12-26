@@ -1365,6 +1365,46 @@ const swaggerDocumentation = {
             },
         },
 
+        '/activities/{id}': {
+            get: {
+                tags: ['Activities'],
+                summary: 'Get activity by ID',
+                description: 'Get activity by ID',
+                operationId: 'getActivityById',
+                parameters: [
+                    {
+                        name: 'id',
+                        in: 'path',
+                        description: 'ID of activity to return',
+                        required: true,
+                        schema: {
+                            type: 'string',
+                        },
+                    },
+                ],
+                security: [
+                    {
+                        bearerAuth: [],
+                    },
+                ],
+                responses: {
+                    '200': {
+                        description: 'Activity was obtained',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    $ref: '#/components/schemas/Activities',
+                                },
+                            },
+                        },
+                    },
+                    '500': {
+                        description: 'Server error',
+                    },
+                },
+            },
+        },
+
         '/transfers': {
             get: {
                 tags: ['Transfers'],
